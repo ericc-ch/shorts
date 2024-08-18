@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
+    // Enable latest features
+    "lib": ["ESNext"],
+
+    // Best practices
     "strict": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true
   }
 }
