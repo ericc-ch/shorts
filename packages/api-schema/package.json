@@ -4,7 +4,6 @@
   "exports": {
     "./crackbot.reaction": "./src/crackbot.reaction.ts"
   },
-  "module": "src/index.ts",
   "scripts": {
     "test": "bun test tests/ --coverage"
   },
