@@ -1,18 +1,18 @@
 {
   "name": "common",
-  "module": "src/index.ts",
-  "devDependencies": {
-    "@types/bun": "^1.1.6"
-  },
+  "type": "module",
   "exports": {
     ".": "./src/index.ts"
   },
-  "type": "module",
+  "module": "src/index.ts",
+  "scripts": {
+    "test": "bun test tests/ --coverage"
+  },
   "dependencies": {
     "@std/encoding": "npm:@jsr/std__encoding",
     "pathe": "^1.1.2"
   },
-  "scripts": {
-    "test": "bun test tests/ --coverage"
+  "devDependencies": {
+    "@types/bun": "^1.1.6"
   }
 }
