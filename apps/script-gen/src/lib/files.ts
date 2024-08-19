@@ -1,6 +1,12 @@
 import { GEMINI_API_KEY } from "@/lib/env.ts";
-import { GoogleAIFileManager } from "@google/generative-ai/server";
+import {
+  FileState,
+  GoogleAIFileManager,
+  type FileMetadataResponse,
+} from "@google/generative-ai/server";
+import { delay } from "@std/async";
 import { TempFileManager } from "common";
+import consola from "consola";
 
 export const filesManager = new GoogleAIFileManager(GEMINI_API_KEY);
 export const tmpFiles = new TempFileManager({
@@ -8,15 +14,19 @@ export const tmpFiles = new TempFileManager({
 });
 
 export async function deleteUploadedFiles() {
+  consola.log("Deleting all uploaded files");
   const fileList = await filesManager.listFiles();
 
   const deletePromises =
     fileList.files?.map((file) => filesManager.deleteFile(file.name)) ?? [];
 
-  return Promise.allSettled(deletePromises);
+  await Promise.allSettled(deletePromises);
+  consola.success("Deleted all uploaded files");
 }
 
 export async function uploadBlob(blob: Blob, mime: string) {
+  consola.log(`Uploading blob: ${blob.size} bytes`);
+
   const fileName = "upload_blob";
 
   // Google SDK does not support Blob
@@ -30,13 +40,33 @@ export async function uploadBlob(blob: Blob, mime: string) {
 
   await tmpFiles.delete(file);
 
+  consola.success(`Uploaded blob: ${response.file.name}`);
   return response;
 }
 
 export async function uploadPath(path: string, mime: string) {
+  consola.log(`Uploading file: ${path}`);
   const response = await filesManager.uploadFile(path, {
     mimeType: mime,
   });
 
+  consola.success(`Uploaded file: ${response.file.name}`);
   return response;
+}
+
+export async function waitForFileActive(file: FileMetadataResponse) {
+  consola.log(`Waiting for file processing: ${file.name}`);
+
+  let newFile = file;
+
+  while (newFile.state === FileState.PROCESSING) {
+    await delay(5000);
+    newFile = await filesManager.getFile(file.name);
+  }
+
+  if (newFile.state !== FileState.ACTIVE) {
+    throw Error(`Failed processing file: ${file.name}`);
+  }
+
+  consola.success(`File processed: ${file.name}`);
 }
