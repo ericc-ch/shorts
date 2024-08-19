@@ -1,4 +1,3 @@
-import type { BunFile } from "bun";
 import { rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "pathe";
