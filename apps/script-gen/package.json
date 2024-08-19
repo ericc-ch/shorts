@@ -1,10 +1,12 @@
 {
   "name": "script-gen",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run src/index.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.17.0",
+    "@hono/zod-validator": "^0.2.2",
+    "api-schema": "workspace:*",
     "common": "workspace:*",
     "hono": "^4.5.6"
   },
