@@ -1,0 +1,14 @@
+{
+  "name": "api-schema",
+  "type": "module",
+  "exports": {
+    "./crackbot.reaction": "./src/crackbot.reaction.ts"
+  },
+  "module": "src/index.ts",
+  "scripts": {
+    "test": "bun test tests/ --coverage"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}
