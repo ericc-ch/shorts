@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const bodySchema = z.object({
+export const requestSchema = z.object({
   url: z.string().url(),
 });
 
@@ -16,7 +16,6 @@ const metadata = z
       ),
     tags: z
       .array(z.string())
-      .min(3, "There must be at least 3 tags.")
       .nonempty()
       .describe("The video tags/topic. Each tag should be only a single word.")
       .refine(
