@@ -1,12 +1,22 @@
 {
   "name": "shorts",
-  "module": "index.ts",
   "type": "module",
+  "module": "index.ts",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "bun run --filter './apps/**' dev"
+    "dev": "bun run --filter './apps/**' dev",
+    "lint": "eslint .",
+    "sort-package-json": "sort-package-json './package.json' './apps/*/package.json' './packages/*/package.json'"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/eslint__js": "^8.42.3",
+    "eslint": "^9.9.0",
+    "sort-package-json": "^2.10.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.1.0"
   }
 }
