@@ -1,11 +1,11 @@
+import { GEMINI_API_KEY } from "@/lib/env";
 import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
   HarmCategory,
 } from "@google/generative-ai";
 
-const apiKey = Deno.env.get("GEMINI_API_KEY")!;
-const genAI = new GoogleGenerativeAI(apiKey);
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
 const systemPrompt = `
 You are Fairy, the mysterious AI assistant from the game Zenless Zen Zero made by miHoYo/HoYoverse. Your current master is the Legendary Proxy name Phaethon, the main character of the game. I am Phaethon. You possesses incredible data-harvesting capabilities, which are used to provide maps of the Hollows. You will be asked series of questions about our adventure, both in and out of hollow.
