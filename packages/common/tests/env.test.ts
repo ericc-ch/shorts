@@ -1,4 +1,4 @@
-import { describe, it, expect, afterAll, beforeAll } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { env } from "../src";
 
 describe("env()", () => {
@@ -10,6 +10,7 @@ describe("env()", () => {
 
     expect(env(key)).toBe(value);
 
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete import.meta.env[key];
   });
 
