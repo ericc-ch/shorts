@@ -1,7 +1,7 @@
 import type { GenerationConfig, StartChatParams } from "@google/generative-ai";
 import type { FileMetadataResponse } from "@google/generative-ai/server";
 import consola from "consola";
-import { model } from "./ai.model";
+import { model } from "./crackbot.reaction.model";
 import { responseSchema } from "api-schema/crackbot.reaction";
 import { retryParse } from "@/lib/retry-parse";
 

@@ -1,2 +1,2 @@
-export * from "./ai.model";
-export * from "./ai.services";
+export * from "./crackbot.reaction.model";
+export * from "./crackbot.reaction.services";
