@@ -1,5 +1,5 @@
 {
-  "name": "mesage-queue",
+  "name": "message-queue",
   "type": "module",
   "exports": {
     ".": "./src/index.ts"

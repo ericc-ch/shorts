@@ -17,6 +17,8 @@ export class RenderQueue {
   public init = async () => {
     this.channel = await this.connection.createChannel();
     this.channel.assertQueue(QUEUE.RENDER);
+
+    return this;
   };
 
   public publish = async <Q extends QueueBase>(data: Q) => {
