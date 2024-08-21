@@ -1,32 +1,35 @@
-import { uploadPath, waitForFileActive } from "@/lib/files";
-import { crackBotReaction } from "@/services/crackbot.reaction";
+import { renderQueue } from "@/lib/queue";
+import { generateCrackbotReaction } from "@/services/generate";
 import { zValidator } from "@hono/zod-validator";
 import { requestSchema } from "api-schema/crackbot.reaction";
-import { MIME_TYPES, ytDlp } from "common";
-import consola from "consola";
+import { VIDEO_TYPE, type QueueCrackBotReaction } from "api-schema/queue";
 import { Hono } from "hono";
-import { rm } from "node:fs/promises";
 
 const routes = new Hono();
 
 routes.post(
-  "/crackbot/reaction",
+  "/generate/crackbot/reaction",
   zValidator("json", requestSchema),
   async (c) => {
     const validated = c.req.valid("json");
 
-    consola.log(`Downloading video: ${validated.url}`);
-    const videoPath = await ytDlp({ url: validated.url });
+    const response = await generateCrackbotReaction(validated);
 
-    consola.success(`Downloaded video: ${videoPath}`);
+    const reactionQueue: QueueCrackBotReaction = {
+      id: globalThis.crypto.randomUUID(),
+      isRendered: false,
+      isUploaded: false,
+      renderedUrl: undefined,
+      metadata: response.meta,
 
-    const uploaded = await uploadPath(videoPath, MIME_TYPES.VIDEO.MP4);
-    await waitForFileActive(uploaded.file);
+      type: VIDEO_TYPE.CRACKBOT_REACTION,
+      payload: {
+        backgroundVideoUrl: validated.url,
+        script: response.script,
+      },
+    };
 
-    consola.log(`Deleting downloaded video: ${videoPath}`);
-    await rm(videoPath);
-
-    const response = await crackBotReaction({ file: uploaded.file });
+    await renderQueue.publish(reactionQueue);
     return c.json(response);
   }
 );
