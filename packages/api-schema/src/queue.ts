@@ -1,3 +1,5 @@
+import type { Metadata } from "./common";
+
 export enum VIDEO_TYPE {
   CRACKBOT_REACTION,
   CRACKBOT_STORY,
@@ -6,11 +8,7 @@ export enum VIDEO_TYPE {
 
 export interface QueueBase {
   id: string;
-  metadata: {
-    title: string;
-    description: string;
-    tags: string[];
-  };
+  metadata: Metadata;
   isRendered: boolean;
   isUploaded: boolean;
 
@@ -20,7 +18,7 @@ export interface QueueBase {
   payload: unknown;
 }
 
-export interface QueueReaction extends QueueBase {
+export interface QueueCrackBotReaction extends QueueBase {
   type: VIDEO_TYPE.CRACKBOT_REACTION;
   payload: {
     script: string;
@@ -28,4 +26,4 @@ export interface QueueReaction extends QueueBase {
   };
 }
 
-export type Queue = QueueReaction;
+export type Queue = QueueCrackBotReaction;
