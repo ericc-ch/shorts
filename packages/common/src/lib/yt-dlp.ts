@@ -5,6 +5,7 @@ interface Options {
   paths?: string;
 }
 
+// TODO: Add option to download best quality, enforce mp4
 export async function ytDlp({ url, paths }: Options) {
   const proc = Bun.spawn([
     "yt-dlp",
