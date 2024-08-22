@@ -14,7 +14,7 @@ export const tmpFiles = new TempFileManager({
 });
 
 export async function deleteUploadedFiles() {
-  consola.log("Deleting all uploaded files");
+  consola.info("Deleting all uploaded files");
   const fileList = await filesManager.listFiles();
 
   const deletePromises =
@@ -25,7 +25,7 @@ export async function deleteUploadedFiles() {
 }
 
 export async function uploadBlob(blob: Blob, mime: string) {
-  consola.log(`Uploading blob: ${blob.size} bytes`);
+  consola.info(`Uploading blob: ${blob.size} bytes`);
 
   const fileName = "upload_blob";
 
@@ -45,7 +45,7 @@ export async function uploadBlob(blob: Blob, mime: string) {
 }
 
 export async function uploadPath(path: string, mime: string) {
-  consola.log(`Uploading file: ${path}`);
+  consola.info(`Uploading file: ${path}`);
   const response = await filesManager.uploadFile(path, {
     mimeType: mime,
   });
@@ -54,13 +54,16 @@ export async function uploadPath(path: string, mime: string) {
   return response;
 }
 
-export async function waitForFileActive(file: FileMetadataResponse) {
-  consola.log(`Waiting for file processing: ${file.name}`);
+export async function waitForFileActive(
+  file: FileMetadataResponse,
+  poll = 1000
+) {
+  consola.info(`Waiting for file processing: ${file.name}`);
 
   let newFile = file;
 
   while (newFile.state === FileState.PROCESSING) {
-    await delay(5000);
+    await delay(poll);
     newFile = await filesManager.getFile(file.name);
   }
 
