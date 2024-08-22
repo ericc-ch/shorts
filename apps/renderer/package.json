@@ -1,12 +1,32 @@
 {
   "name": "renderer",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "build": "remotionb render CaptionedVideo",
+    "create-subtitles": "node sub.mjs",
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts",
+    "studio": "remotionb studio",
+    "test": "eslint src --ext ts,tsx,js,jsx && tsc",
+    "upgrade": "remotionb upgrade"
   },
   "dependencies": {
-    "hono": "^4.5.7"
+    "@remotion/animation-utils": "4.0.201",
+    "@remotion/cli": "4.0.201",
+    "@remotion/layout-utils": "4.0.201",
+    "@remotion/media-utils": "4.0.201",
+    "@remotion/zod-types": "4.0.201",
+    "pathe": "^1.1.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "remotion": "4.0.201",
+    "zod": "3.22.3"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@remotion/eslint-config": "4.0.201",
+    "@remotion/install-whisper-cpp": "4.0.201",
+    "@types/react": "^18.0.26",
+    "@types/web": "^0.0.143",
+    "eslint": "^8.43.0",
+    "typescript": "^5.4.5"
   }
 }
