@@ -27,7 +27,7 @@ export const crackBotReaction = async ({ file }: CrackBotReactionOptions) => {
   const getResponse = async () => {
     const session = createSession();
 
-    consola.log(`Waiting for Gemini response: CrackBot Reaction`);
+    consola.info(`Waiting for Gemini response: CrackBot Reaction`);
     const reply = await session.sendMessage([
       {
         fileData: {

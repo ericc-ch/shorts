@@ -15,7 +15,7 @@ routes.post(
   async (c) => {
     const validated = c.req.valid("json");
 
-    consola.log(`Downloading video: ${validated.url}`);
+    consola.info(`Downloading video: ${validated.url}`);
     const videoPath = await ytDlp({ url: validated.url });
 
     consola.success(`Downloaded video: ${videoPath}`);
@@ -23,7 +23,7 @@ routes.post(
     const uploaded = await uploadPath(videoPath, MIME_TYPES.VIDEO.MP4);
     await waitForFileActive(uploaded.file);
 
-    consola.log(`Deleting downloaded video: ${videoPath}`);
+    consola.info(`Deleting downloaded video: ${videoPath}`);
     await rm(videoPath);
 
     const response = await crackBotReaction({ file: uploaded.file });

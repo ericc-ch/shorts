@@ -9,7 +9,7 @@ interface Options {
 export const retryParse = async ({ fn, retries }: Options) => {
   for (let i = 0; i < retries; i++) {
     try {
-      consola.log(`Parsing JSON: ${i + 1}/${retries}`);
+      consola.info(`Parsing JSON: attempt ${i + 1}/${retries}`);
       const jsonString = await fn();
       const result = safeDestr(jsonString);
 
