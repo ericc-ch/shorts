@@ -22,15 +22,7 @@ export function Word({ enterProgress, text, stroke }: Props) {
   const fontSize = Math.min(desiredFontSize, fittedText.fontSize);
 
   return (
-    <AbsoluteFill
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        top: undefined,
-        bottom: 350,
-        height: 150,
-      }}
-    >
+    <AbsoluteFill>
       <div
         style={{
           fontSize,

@@ -1,11 +1,7 @@
-import {
-  AbsoluteFill,
-  Audio,
-  OffthreadVideo,
-  Sequence,
-  staticFile,
-} from "remotion";
-import { config, FRAME_IN_MS } from "../../lib/config";
+import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
+import { CrackBot } from "../../components/CrackBot";
+import { LoopedOffthreadVideo } from "../../components/LoopedOffthreadVideo";
+import { config, FRAME_IN_MS, getVideoDuration } from "../../lib/config";
 import { Subtitle } from "./components/Subtitle";
 
 // Custom fonts
@@ -24,7 +20,8 @@ export function CrackBotReaction() {
   return (
     <AbsoluteFill style={{ backgroundColor: "white" }}>
       <AbsoluteFill>
-        <OffthreadVideo
+        <LoopedOffthreadVideo
+          durationInFrames={Math.ceil(getVideoDuration() / FRAME_IN_MS)}
           style={{ objectFit: "cover" }}
           src={videoSrc}
           volume={0.5}
@@ -33,15 +30,21 @@ export function CrackBotReaction() {
 
       <Audio src={audioSrc} />
 
-      {subtitles.map((subtitle, index) => (
-        <Sequence
-          key={index}
-          from={subtitle.start / FRAME_IN_MS}
-          durationInFrames={subtitle.duration / FRAME_IN_MS}
-        >
-          <Subtitle text={subtitle.text} />O
-        </Sequence>
-      ))}
+      <AbsoluteFill style={{ top: '75%', left: '50%' }} >
+        <CrackBot audioSrc={audioSrc} />
+      </AbsoluteFill>
+
+      <AbsoluteFill style={{ top: "65%" }}>
+        {subtitles.map((subtitle, index) => (
+          <Sequence
+            key={index}
+            from={subtitle.start / FRAME_IN_MS}
+            durationInFrames={subtitle.duration / FRAME_IN_MS}
+          >
+            <Subtitle text={subtitle.text} />O
+          </Sequence>
+        ))}
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 }
