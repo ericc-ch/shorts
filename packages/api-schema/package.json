@@ -6,6 +6,7 @@
     "./queue": "./src/queue.ts"
   },
   "dependencies": {
+    "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
     "zod": "^3.23.8"
   }
 }
