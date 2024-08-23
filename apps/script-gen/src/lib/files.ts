@@ -56,7 +56,7 @@ export async function uploadPath(path: string, mime: string) {
 
 export async function waitForFileActive(
   file: FileMetadataResponse,
-  poll = 1000
+  poll = 1000,
 ) {
   consola.info(`Waiting for file processing: ${file.name}`);
 

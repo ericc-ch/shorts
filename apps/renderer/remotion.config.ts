@@ -1,6 +1,6 @@
 import { Config } from "@remotion/cli/config";
 import { cpus } from "node:os";
-import path from "path";
+import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
 
 Config.setConcurrency(cpus().length);
 
@@ -9,10 +9,7 @@ Config.overrideWebpackConfig((config) => {
     ...config,
     resolve: {
       ...config.resolve,
-      alias: {
-        ...(config.resolve?.alias ?? {}),
-        "~": path.join(process.cwd()),
-      },
+      plugins: [...(config.resolve?.plugins ?? []), new TsconfigPathsPlugin()],
     },
   };
 });

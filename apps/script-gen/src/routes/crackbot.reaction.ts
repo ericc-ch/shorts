@@ -28,7 +28,7 @@ routes.post(
 
     const response = await crackBotReaction({ file: uploaded.file });
     return c.json(response);
-  }
+  },
 );
 
 export default routes;

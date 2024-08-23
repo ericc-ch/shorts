@@ -18,7 +18,7 @@ describe("env()", () => {
     const key = "NON_EXISTENT_VAR";
 
     expect(() => env(key)).toThrowError(
-      `Environment variable ${key} is not set`
+      `Environment variable ${key} is not set`,
     );
   });
 });

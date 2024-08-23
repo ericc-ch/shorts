@@ -30,7 +30,7 @@ export class RenderQueue {
   };
 
   public subscribe = async (
-    callback: (data: Queue, ack: () => void) => void | Promise<void>
+    callback: (data: Queue, ack: () => void) => void | Promise<void>,
   ) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
 

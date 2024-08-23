@@ -8,7 +8,7 @@ export const metadata = z
     description: z
       .string()
       .describe(
-        "The video description. This is a YouTube Short video, so the description should only be 1 sentence long."
+        "The video description. This is a YouTube Short video, so the description should only be 1 sentence long.",
       ),
     tags: z
       .array(z.string())
@@ -16,7 +16,7 @@ export const metadata = z
       .describe("The video tags/topic. Each tag should be only a single word.")
       .refine(
         (tags) => new Set(tags).size === tags.length,
-        "Tags must be unique."
+        "Tags must be unique.",
       ),
   })
   .strict()

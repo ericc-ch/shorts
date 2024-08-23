@@ -46,7 +46,7 @@ export const crackBotReaction = async ({ file }: CrackBotReactionOptions) => {
   });
 
   consola.success(
-    `Got Gemini response: ${JSON.stringify(parsed).slice(0, 100)}`
+    `Got Gemini response: ${JSON.stringify(parsed).slice(0, 100)}`,
   );
 
   const response = responseSchema.parse(parsed);

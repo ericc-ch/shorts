@@ -9,7 +9,7 @@ const app = new Hono();
 app.use("*", logger());
 app.use(
   "*",
-  basicAuthMiddleware({ username: AUTH_USERNAME, password: AUTH_PASSWORD })
+  basicAuthMiddleware({ username: AUTH_USERNAME, password: AUTH_PASSWORD }),
 );
 
 for (const route of routes) {

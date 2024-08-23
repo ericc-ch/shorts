@@ -10,8 +10,8 @@
     "upgrade": "remotionb upgrade"
   },
   "dependencies": {
-    "@fontsource-variable/pixelify-sans": "^5.0.4",
     "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
+    "@fontsource-variable/pixelify-sans": "^5.0.4",
     "@remotion/animation-utils": "4.0.201",
     "@remotion/cli": "4.0.201",
     "@remotion/layout-utils": "4.0.201",

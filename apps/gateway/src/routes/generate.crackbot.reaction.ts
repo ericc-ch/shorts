@@ -32,7 +32,7 @@ routes.post(
 
     await renderQueue.publish(reactionQueue);
     return c.json(response);
-  }
+  },
 );
 
 export default routes;

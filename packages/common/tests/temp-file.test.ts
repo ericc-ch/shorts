@@ -37,7 +37,7 @@ describe("TempFileManager", () => {
     const data = "Hello, world!";
 
     const createPromises = fileNames.map((filename) =>
-      manager.create(filename, data)
+      manager.create(filename, data),
     );
 
     const results = await Promise.all(createPromises);
@@ -45,7 +45,7 @@ describe("TempFileManager", () => {
     await manager.deleteAll();
 
     const filesExistences = await Promise.all(
-      results.map((filePath) => Bun.file(filePath).exists())
+      results.map((filePath) => Bun.file(filePath).exists()),
     );
 
     expect(filesExistences.every((exists) => !exists)).toBe(true);
