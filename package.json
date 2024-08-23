@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "bun run --filter './apps/**' dev",
+    "format": "prettier --write .",
     "lint": "eslint .",
     "sort-package-json": "sort-package-json './package.json' './apps/*/package.json' './packages/*/package.json'",
     "test": "bun run test:apps; bun run test:packages",
@@ -18,6 +19,7 @@
     "@eslint/js": "^9.9.0",
     "@types/eslint__js": "^8.42.3",
     "eslint": "^9.9.0",
+    "prettier": "^3.3.3",
     "sort-package-json": "^2.10.1",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.2.0"
