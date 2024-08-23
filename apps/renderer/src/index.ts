@@ -3,6 +3,10 @@ import consola from "consola";
 import { renderQueue } from "./lib/queue";
 import { renderCrackBotReaction } from "./lib/renders/crackbot.reaction";
 import { clearAssets } from "./lib/files";
+import { exists, mkdir } from "node:fs/promises";
+import { PUBLIC_DIR } from "./lib/paths";
+
+if (!(await exists(PUBLIC_DIR))) await mkdir(PUBLIC_DIR);
 
 const functionMap = new Map([
   [VIDEO_TYPE.CRACKBOT_REACTION, renderCrackBotReaction],
