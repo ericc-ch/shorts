@@ -1,5 +1,5 @@
 import amqp from "amqplib";
-import type { QueueBase } from "api-schema/queue";
+import type { Queue, QueueBase } from "api-schema/queue";
 import invariant from "tiny-invariant";
 import { deserialize, serialize } from "../serializer";
 import { QUEUE } from "../types";
@@ -29,8 +29,8 @@ export class RenderQueue {
     this.channel.sendToQueue(QUEUE.RENDER, serialized);
   };
 
-  public subscribe = async <Q extends QueueBase>(
-    callback: (data: Q, ack: () => void) => void | Promise<void>
+  public subscribe = async (
+    callback: (data: Queue, ack: () => void) => void | Promise<void>
   ) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
 
