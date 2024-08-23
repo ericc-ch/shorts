@@ -6,6 +6,10 @@ import { QUEUE } from "../types";
 
 const ERROR_MSG_NOT_INITIALIZED = "Channel not initialized. Call init() first";
 
+type InitOptions = {
+  prefetch?: number;
+};
+
 export class RenderQueue {
   private connection: amqp.Connection;
   private channel?: amqp.Channel;
@@ -14,9 +18,11 @@ export class RenderQueue {
     this.connection = connection;
   }
 
-  public init = async () => {
+  public init = async ({ prefetch = 1 }: InitOptions = {}) => {
     this.channel = await this.connection.createChannel();
-    this.channel.assertQueue(QUEUE.RENDER);
+
+    await this.channel.assertQueue(QUEUE.RENDER);
+    await this.channel.prefetch(prefetch);
 
     return this;
   };
