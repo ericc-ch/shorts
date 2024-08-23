@@ -6,6 +6,8 @@ import { audioPath, videoPath } from "../paths";
 import { writeConfig } from "../files";
 
 export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
+  consola.info(`Rendering CrackBot Reaction video: ${queue.id}`);
+
   const { audio, subtitle } = await generate({
     text: queue.payload.script,
     language: queue.renderOptions.language,
@@ -21,7 +23,9 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
   await Bun.write(scriptPath, audio);
   consola.success(`Generated audio: ${scriptPath}`);
 
-  const downloadedPath = await ytDlp({ url: queue.payload.backgroundVideoUrl });
+  const downloadedPath = await ytDlp({
+    url: queue.payload.backgroundVideoUrl,
+  });
   const file = await moveFile(downloadedPath, videoPath(queue.id));
   consola.success(`Downloaded video: ${file.name}`);
 
