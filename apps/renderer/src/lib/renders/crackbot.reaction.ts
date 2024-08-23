@@ -13,7 +13,7 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
 
     subtitle: {
       splitBy: "duration",
-      count: 1800,
+      count: 1000,
     },
   });
 
@@ -36,4 +36,11 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
   };
 
   await writeConfig(config);
+  consola.success("Configuration written");
+
+  consola.info(`Rendering video: ${queue.id}`);
+  const proc = Bun.spawn(["bun", "run", "render"]);
+  await proc.exited;
+
+  consola.info(`Video rendered: ${queue.id}`);
 }

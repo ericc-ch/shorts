@@ -1,13 +1,10 @@
 {
   "name": "renderer",
   "scripts": {
-    "build": "remotionb render CaptionedVideo",
-    "create-subtitles": "node sub.mjs",
+    "render": "remotionb render shorts",
     "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts",
-    "studio": "remotionb studio",
-    "test": "eslint src --ext ts,tsx,js,jsx && tsc",
-    "upgrade": "remotionb upgrade"
+    "studio": "remotionb studio"
   },
   "dependencies": {
     "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
@@ -20,7 +17,6 @@
     "common": "workspace:*",
     "consola": "^3.2.3",
     "message-queue": "workspace:*",
-    "pathe": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "remotion": "4.0.201",

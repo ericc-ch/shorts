@@ -9,13 +9,15 @@ const functionMap = new Map([
 ] as const);
 
 renderQueue.subscribe(async (data, ack) => {
+  consola.info(`Received render request: ${data.id}`);
+
   const func = functionMap.get(data.type);
   if (!func) throw new Error(`Unknown video type: ${data.type}`);
 
   await func(data);
   consola.success(`Rendered video: ${data.id}`);
 
-  await clearAssets();
+  // await clearAssets();
   consola.info(`Cleared assets (public) folder`);
 
   ack();
