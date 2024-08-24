@@ -1,4 +1,4 @@
-import { SCRIPT_GEN_SERVER_PORT } from "@/lib/env.ts";
+import { GEMINI_API_KEY } from "@/lib/env.ts";
 import {
   FileState,
   GoogleAIFileManager,
@@ -8,7 +8,7 @@ import { delay } from "@std/async";
 import { TempFileManager } from "common";
 import consola from "consola";
 
-export const filesManager = new GoogleAIFileManager(SCRIPT_GEN_SERVER_PORT);
+export const filesManager = new GoogleAIFileManager(GEMINI_API_KEY);
 export const tmpFiles = new TempFileManager({
   dir: "shorts-script-gen",
 });
