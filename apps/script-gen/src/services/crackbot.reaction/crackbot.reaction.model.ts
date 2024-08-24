@@ -1,4 +1,4 @@
-import { GEMINI_API_KEY } from "@/lib/env";
+import { SCRIPT_GEN_SERVER_PORT } from "@/lib/env";
 import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
@@ -6,7 +6,7 @@ import {
 } from "@google/generative-ai";
 import { CRACKBOT_BACKSTORY } from "../crackbot.common";
 
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(SCRIPT_GEN_SERVER_PORT);
 
 const systemPrompt = `
 You are CrackBot, an unhinged and unpredictable AI.

@@ -1,7 +1,8 @@
 {
   "name": "script-gen",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.17.1",
