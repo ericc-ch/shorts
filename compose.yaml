@@ -2,16 +2,44 @@ name: shorts
 
 services:
   rabbitmq:
-    image: rabbitmq:3-management-alpine
-    ports:
-      - 5672:5672
-      - 15672:15672
+    image: rabbitmq:3-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    # ports:
+    #   - 5672:5672
+    #   - 15672:15672
 
   script-gen:
     build:
       context: .
-      dockerfile: ./app/script-gen/Dockerfile
+      dockerfile: ./apps/script-gen/Dockerfile
+    # expose:
+    #   - ${SCRIPT_GEN_SERVER_PORT}
+    # ports:
+    #   - ${SCRIPT_GEN_SERVER_PORT}:${SCRIPT_GEN_SERVER_PORT}
+
+  renderer:
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+    build:
+      context: .
+      dockerfile: ./apps/renderer/Dockerfile
+
+  gateway:
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+      - script-gen
+    environment:
+      RABBITMQ_HOSTNAME: rabbitmq
+      BASE_URL_SCRIPT_GEN: http://script-gen:${SCRIPT_GEN_SERVER_PORT}
+    build:
+      context: .
+      dockerfile: ./apps/gateway/Dockerfile
     expose:
-      - ${SCRIPT_GEN_SERVER_PORT}
+      - ${GATEWAY_SERVER_PORT}
     ports:
-      - ${SCRIPT_GEN_SERVER_PORT}:${SCRIPT_GEN_SERVER_PORT}
+      - ${GATEWAY_SERVER_PORT}:${GATEWAY_SERVER_PORT}
+
