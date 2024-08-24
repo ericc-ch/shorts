@@ -1,0 +1,17 @@
+name: shorts
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  script-gen:
+    build:
+      context: .
+      dockerfile: ./app/script-gen/Dockerfile
+    expose:
+      - ${SCRIPT_GEN_SERVER_PORT}
+    ports:
+      - ${SCRIPT_GEN_SERVER_PORT}:${SCRIPT_GEN_SERVER_PORT}
