@@ -1,8 +1,8 @@
 {
   "name": "renderer",
   "scripts": {
-    "render": "remotionb render shorts",
     "dev": "bun run --hot src/index.ts",
+    "render": "remotionb render shorts",
     "start": "bun run src/index.ts",
     "studio": "remotionb studio"
   },
