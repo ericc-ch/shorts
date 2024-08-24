@@ -44,6 +44,19 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
 
   consola.info(`Rendering video: ${queue.id}`);
   const proc = Bun.spawn(["bun", "run", "render"]);
+
+  const stdout = new WritableStream({
+    write: async (chunk) => {
+      const encoder = new TextEncoder();
+
+      await Bun.write(Bun.stdout, encoder.encode("\r"));
+      await Bun.write(Bun.stdout, encoder.encode("\x1b[2K"));
+
+      await Bun.write(Bun.stdout, chunk);
+    },
+  });
+
+  await proc.stdout.pipeTo(stdout);
   await proc.exited;
 
   consola.info(`Video rendered: ${queue.id}`);
