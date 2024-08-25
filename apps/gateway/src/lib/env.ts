@@ -1,6 +1,6 @@
 import { env } from "common";
 
-export const GATEWAY_SERVER_PORT = env("GATEWAY_SERVER_PORT");
+export const SERVER_PORT_GATEWAY = env("SERVER_PORT_GATEWAY");
 
 export const BASE_URL_SCRIPT_GEN = env("BASE_URL_SCRIPT_GEN");
 

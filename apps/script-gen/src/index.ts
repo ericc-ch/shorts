@@ -1,7 +1,7 @@
 import type { Serve } from "bun";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { SCRIPT_GEN_SERVER_PORT } from "./lib/env";
+import { SERVER_PORT_SCRIPT_GEN } from "./lib/env";
 import { routes } from "./routes";
 import { deleteUploadedFiles } from "./lib/files";
 
@@ -16,5 +16,5 @@ for (const route of routes) {
 
 export default {
   fetch: app.fetch,
-  port: SCRIPT_GEN_SERVER_PORT,
+  port: SERVER_PORT_SCRIPT_GEN,
 } satisfies Serve;
