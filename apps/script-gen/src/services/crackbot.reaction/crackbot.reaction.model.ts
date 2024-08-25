@@ -43,7 +43,7 @@ Output your response in JSON format according to the following schema:
                 },
                 "tags": {
                     "type": "array",
-                    "description": "The video tags/topic.",
+                    "description": "The video tags/topic. A Tag must be only a single word and in lowercase.",
                     "uniqueItems": true,
                     "minItems": 3,
                     "items": {
