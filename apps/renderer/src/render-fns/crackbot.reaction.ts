@@ -7,7 +7,6 @@ import { writeConfig } from "../lib/files";
 import {
   assetAudioPath,
   assetVideoPath,
-  outputVideoPath,
   renderedVideoPath,
 } from "../lib/paths";
 import { renderVideo } from "../lib/render-video";
@@ -47,10 +46,11 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
   await writeConfig(config);
   consola.success("Configuration written");
 
-  await renderVideo("CRACKBOTREACTION", queue);
+  const result = await renderVideo("CRACKBOTREACTION", queue);
 
-  await moveFile(outputVideoPath(queue.id), renderedVideoPath(queue.id));
-  consola.success(`Moved video: ${renderedVideoPath(queue.id)}`);
+  const blob = new Blob([result ?? new Blob()]);
+
+  await Bun.write(renderedVideoPath(queue.id), blob);
 
   await writeConfig(config, {
     dir: RENDER_OUTPUT,

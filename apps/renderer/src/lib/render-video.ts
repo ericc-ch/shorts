@@ -4,7 +4,6 @@ import type { Queue } from "api-schema/queue";
 import consola from "consola";
 import { cpus } from "node:os";
 import { join } from "pathe";
-import { outputVideoPath } from "./paths";
 import { webpackOverride } from "./webpack-override";
 
 export async function renderVideo(compositionId: string, queue: Queue) {
@@ -27,7 +26,6 @@ export async function renderVideo(compositionId: string, queue: Queue) {
     serveUrl,
     composition,
     concurrency: cpus().length,
-    outputLocation: join(import.meta.dir, outputVideoPath(queue.id)),
     codec: "h264",
     onProgress: ({ progress }) => {
       if (!progress) return;
@@ -39,5 +37,5 @@ export async function renderVideo(compositionId: string, queue: Queue) {
     },
   });
 
-  consola.log(result)
+  return result.buffer;
 }
