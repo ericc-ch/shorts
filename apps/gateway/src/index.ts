@@ -27,5 +27,3 @@ export default {
   fetch: app.fetch,
   port: SERVER_PORT_GATEWAY,
 } satisfies Serve;
-
-console.log(Bun.env["WOW"]);

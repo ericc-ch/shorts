@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "bun run --filter './apps/**' dev",
+    "dev": "bun run --env-file ./.env --filter './apps/**' dev",
     "format": "prettier --write .",
     "lint": "eslint .",
     "sort-package-json": "sort-package-json './package.json' './apps/*/package.json' './packages/*/package.json'",
