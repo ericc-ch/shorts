@@ -24,7 +24,7 @@ export function CrackBotReaction() {
           durationInFrames={Math.ceil(getVideoDuration() / FRAME_IN_MS)}
           style={{ objectFit: "cover" }}
           src={videoSrc}
-          volume={0.5}
+          volume={0.2}
         />
       </AbsoluteFill>
 

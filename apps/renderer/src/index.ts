@@ -1,10 +1,10 @@
 import { VIDEO_TYPE } from "api-schema/queue";
 import consola from "consola";
-import { renderQueue } from "./lib/queue";
-import { renderCrackBotReaction } from "./lib/renders/crackbot.reaction";
-import { clearAssets } from "./lib/files";
 import { exists, mkdir } from "node:fs/promises";
+import { clearAssets } from "./lib/files";
 import { PUBLIC_DIR } from "./lib/paths";
+import { renderQueue } from "./lib/queue";
+import { renderCrackBotReaction } from "./render-fns/crackbot.reaction";
 
 if (!(await exists(PUBLIC_DIR))) await mkdir(PUBLIC_DIR);
 

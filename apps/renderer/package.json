@@ -2,7 +2,6 @@
   "name": "renderer",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "render": "remotionb render shorts",
     "start": "bun run src/index.ts",
     "studio": "remotionb studio"
   },
@@ -10,19 +9,21 @@
     "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
     "@fontsource-variable/pixelify-sans": "^5.0.4",
     "@remotion/animation-utils": "4.0.201",
-    "@remotion/cli": "4.0.201",
-    "@remotion/layout-utils": "4.0.201",
-    "@remotion/media-utils": "4.0.201",
-    "@remotion/zod-types": "4.0.201",
+    "@remotion/bundler": "^4.0.202",
+    "@remotion/layout-utils": "4.0.202",
+    "@remotion/media-utils": "4.0.202",
+    "@remotion/renderer": "^4.0.202",
     "common": "workspace:*",
     "consola": "^3.2.3",
     "message-queue": "workspace:*",
+    "pathe": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "remotion": "4.0.201",
     "tsconfig-paths-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
+    "@remotion/cli": "4.0.202",
     "@types/react": "^18.3.4"
   }
 }

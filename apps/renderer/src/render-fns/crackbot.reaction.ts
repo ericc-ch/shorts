@@ -2,12 +2,11 @@ import { generate } from "@ericc/edge-tts";
 import { type QueueCrackBotReaction } from "api-schema/queue";
 import { moveFile, ytDlp } from "common";
 import consola from "consola";
-import { audioPath, videoPath } from "../paths";
-import { writeConfig } from "../files";
+import { writeConfig } from "../lib/files";
+import { audioPath, videoPath } from "../lib/paths";
+import { renderVideo } from '../lib/render-video';
 
 export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
-  consola.info(`Rendering CrackBot Reaction video: ${queue.id}`);
-
   const { audio, subtitle } = await generate({
     text: queue.payload.script,
     language: queue.renderOptions.language,
@@ -42,22 +41,5 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
   await writeConfig(config);
   consola.success("Configuration written");
 
-  consola.info(`Rendering video: ${queue.id}`);
-  const proc = Bun.spawn(["bun", "run", "render"]);
-
-  const stdout = new WritableStream({
-    write: async (chunk) => {
-      const encoder = new TextEncoder();
-
-      await Bun.write(Bun.stdout, encoder.encode("\r"));
-      await Bun.write(Bun.stdout, encoder.encode("\x1b[2K"));
-
-      await Bun.write(Bun.stdout, chunk);
-    },
-  });
-
-  await proc.stdout.pipeTo(stdout);
-  await proc.exited;
-
-  consola.info(`Video rendered: ${queue.id}`);
+  await renderVideo('CRACKBOTREACTION')
 }
