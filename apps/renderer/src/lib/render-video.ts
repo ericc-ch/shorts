@@ -1,17 +1,18 @@
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition } from "@remotion/renderer";
+import type { Queue } from "api-schema/queue";
 import consola from "consola";
 import { cpus } from "node:os";
 import { join } from "pathe";
-import { config } from "../remotion/lib/config";
+import { outputVideoPath } from "./paths";
 import { webpackOverride } from "./webpack-override";
 
-export async function renderVideo(compositionId: string) {
+export async function renderVideo(compositionId: string, queue: Queue) {
   const serveUrl = await bundle({
     entryPoint: join(import.meta.dir, "../remotion/index.ts"),
     webpackOverride: webpackOverride,
   });
-  consola.success(`Bundled video: ${config.id}.mp4`);
+  consola.success(`Bundled video: ${queue.id}.mp4`);
 
   const composition = await selectComposition({
     serveUrl,
@@ -22,11 +23,11 @@ export async function renderVideo(compositionId: string) {
   let logCount = 0;
   const logFrequency = 400;
 
-  await renderMedia({
+  const result = await renderMedia({
     serveUrl,
     composition,
     concurrency: cpus().length,
-    outputLocation: join(import.meta.dir, `../../out/${config.id}.mp4`),
+    outputLocation: join(import.meta.dir, outputVideoPath(queue.id)),
     codec: "h264",
     onProgress: ({ progress }) => {
       if (!progress) return;
@@ -37,4 +38,6 @@ export async function renderVideo(compositionId: string) {
       logCount += 1;
     },
   });
+
+  consola.log(result)
 }

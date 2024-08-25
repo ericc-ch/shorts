@@ -1,9 +1,20 @@
-import { rm, mkdir } from "node:fs/promises";
 import type { Queue } from "api-schema/queue";
-import { PUBLIC_DIR, VIDEO_CONFIG_PATH } from "./paths";
+import { mkdir, rm } from "node:fs/promises";
+import { configPath, PUBLIC_DIR } from "./paths";
 
-export async function writeConfig(config: Queue) {
-  return Bun.write(VIDEO_CONFIG_PATH, JSON.stringify(config));
+type WriteConfigOption = {
+  dir: string;
+  filename?: string;
+};
+
+export function writeConfig(
+  config: Queue,
+  options: WriteConfigOption = { dir: PUBLIC_DIR },
+) {
+  return Bun.write(
+    configPath(options.dir, options.filename),
+    JSON.stringify(config),
+  );
 }
 
 export async function clearAssets() {

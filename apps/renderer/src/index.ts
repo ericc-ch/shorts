@@ -21,8 +21,8 @@ renderQueue.subscribe(async (data, ack) => {
   await func(data);
   consola.success(`Rendered video: ${data.id}`);
 
+  ack();
+
   await clearAssets();
   consola.info(`Cleared assets (public) folder`);
-
-  ack();
 });
