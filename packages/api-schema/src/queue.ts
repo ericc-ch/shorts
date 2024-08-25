@@ -14,7 +14,6 @@ export interface QueueBase {
   isUploaded: boolean;
 
   renderOptions: RenderOptions;
-  renderedUrl?: string;
 
   type: VIDEO_TYPE;
   payload: unknown;
