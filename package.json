@@ -16,9 +16,9 @@
     "test:packages": "bun run --filter './packages/**' test"
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
+    "@eslint/js": "^9.9.1",
     "@types/eslint__js": "^8.42.3",
-    "eslint": "^9.9.0",
+    "eslint": "^9.9.1",
     "prettier": "^3.3.3",
     "sort-package-json": "^2.10.1",
     "typescript": "^5.5.4",
