@@ -3,43 +3,47 @@ name: shorts
 services:
   rabbitmq:
     image: rabbitmq:3-alpine
+    env_file: ./.env
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-    # ports:
-    #   - 5672:5672
-    #   - 15672:15672
 
   script-gen:
     build:
       context: .
       dockerfile: ./apps/script-gen/Dockerfile
-    # expose:
-    #   - ${SCRIPT_GEN_SERVER_PORT}
-    # ports:
-    #   - ${SCRIPT_GEN_SERVER_PORT}:${SCRIPT_GEN_SERVER_PORT}
+    env_file: ./.env
 
   renderer:
-    restart: unless-stopped
-    depends_on:
-      - rabbitmq
     build:
       context: .
       dockerfile: ./apps/renderer/Dockerfile
-
-  gateway:
-    restart: unless-stopped
     depends_on:
       - rabbitmq
-      - script-gen
+    env_file: ./.env
     environment:
+      RENDER_OUTPUT: "/app/out"
       RABBITMQ_HOSTNAME: rabbitmq
-      BASE_URL_SCRIPT_GEN: http://script-gen:${SCRIPT_GEN_SERVER_PORT}
+    volumes:
+      - type: bind
+        bind:
+          create_host_path: true
+        source: ${RENDER_OUTPUT}
+        target: /app/out
+    restart: unless-stopped
+
+  gateway:
     build:
       context: .
       dockerfile: ./apps/gateway/Dockerfile
+    depends_on:
+      - rabbitmq
+    env_file: ./.env
+    environment:
+      RABBITMQ_HOSTNAME: rabbitmq
+      BASE_URL_SCRIPT_GEN: http://script-gen:${SERVER_PORT_SCRIPT_GEN}
     expose:
-      - ${GATEWAY_SERVER_PORT}
+      - ${SERVER_PORT_GATEWAY}
     ports:
-      - ${GATEWAY_SERVER_PORT}:${GATEWAY_SERVER_PORT}
-
+      - ${SERVER_PORT_GATEWAY}:${SERVER_PORT_GATEWAY}
+    restart: unless-stopped
