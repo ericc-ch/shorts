@@ -35,7 +35,7 @@ Output your response in JSON format according to the following schema:
             "properties": {
                 "title": {
                     "type": "string",
-                    "description": "The video title. Clickbait-y titles are recommended."
+                    "description": "The video title. Don't make it clickbait-y."
                 },
                 "description": {
                     "type": "string",
