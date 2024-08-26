@@ -12,7 +12,7 @@ import {
 } from "../lib/paths";
 import { renderVideo } from "../lib/render-video";
 
-export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
+export async function crackbotReaction(queue: QueueCrackBotReaction) {
   const { audio, subtitle } = await generate({
     language: queue.renderOptions.language,
     subtitle: {
@@ -21,6 +21,7 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
     },
     text: queue.payload.script!,
     voice: queue.renderOptions.voice,
+    volume: "+50%",
   });
 
   const scriptPath = assetAudioPath(queue.id);
