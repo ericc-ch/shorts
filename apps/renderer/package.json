@@ -6,13 +6,13 @@
     "studio": "remotionb studio"
   },
   "dependencies": {
-    "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
     "@fontsource-variable/pixelify-sans": "^5.0.4",
+    "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
     "@remotion/animation-utils": "4.0.201",
-    "@remotion/bundler": "^4.0.202",
+    "@remotion/bundler": "^4.0.204",
     "@remotion/layout-utils": "4.0.202",
     "@remotion/media-utils": "4.0.202",
-    "@remotion/renderer": "^4.0.202",
+    "@remotion/renderer": "^4.0.204",
     "common": "workspace:*",
     "consola": "^3.2.3",
     "message-queue": "workspace:*",
