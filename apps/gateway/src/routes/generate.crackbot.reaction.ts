@@ -1,4 +1,4 @@
-import { renderQueue } from "@/lib/queue";
+import { messageQueue } from "@/lib/queue";
 import { generateCrackbotReaction } from "@/services/generate";
 import { zValidator } from "@hono/zod-validator";
 import { gatewayRequestSchema } from "api-schema/crackbot.reaction";
@@ -30,7 +30,7 @@ routes.post(
       type: VIDEO_TYPE.CRACKBOT_REACTION,
     };
 
-    renderQueue.publish(reactionQueue);
+    messageQueue.publish(reactionQueue);
     return c.json(response);
   },
 );

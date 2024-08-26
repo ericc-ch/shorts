@@ -1,10 +1,11 @@
 import { VIDEO_TYPE } from "api-schema/queue";
 import consola from "consola";
+import { QUEUE } from "message-queue";
 import { exists, mkdir } from "node:fs/promises";
 
 import { clearAssets } from "./lib/files";
 import { PUBLIC_DIR } from "./lib/paths";
-import { renderQueue } from "./lib/queue";
+import { messageQueue } from "./lib/queue";
 import { renderCrackBotReaction } from "./render-fns/crackbot.reaction";
 
 if (!(await exists(PUBLIC_DIR))) await mkdir(PUBLIC_DIR);
@@ -13,7 +14,7 @@ const functionMap = new Map([
   [VIDEO_TYPE.CRACKBOT_REACTION, renderCrackBotReaction],
 ] as const);
 
-await renderQueue.subscribe(async (data, ack) => {
+await messageQueue.subscribe(QUEUE.RENDER, async (data, ack) => {
   consola.info(`Received render request: ${data.id}`);
 
   const func = functionMap.get(data.type);

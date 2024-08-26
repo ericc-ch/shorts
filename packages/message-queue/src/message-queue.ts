@@ -3,8 +3,8 @@ import type { Queue, QueueBase } from "api-schema/queue";
 import amqp from "amqplib";
 import invariant from "tiny-invariant";
 
-import { deserialize, serialize } from "../serializer";
-import { QUEUE } from "../types";
+import { deserialize, serialize } from "./lib/serializer";
+import { QUEUE } from "./types";
 
 const ERROR_MSG_NOT_INITIALIZED = "Channel not initialized. Call init() first";
 
@@ -12,7 +12,7 @@ type InitOptions = {
   prefetch?: number;
 };
 
-export class RenderQueue {
+export class MessageQueue {
   private ack = (message: amqp.ConsumeMessage) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
     this.channel.ack(message);
@@ -30,20 +30,21 @@ export class RenderQueue {
     return this;
   };
 
-  public publish = (data: QueueBase) => {
+  public publish = (queue: QUEUE, data: QueueBase) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
 
     const serialized = serialize(data);
 
-    this.channel.sendToQueue(QUEUE.RENDER, serialized);
+    this.channel.sendToQueue(queue, serialized);
   };
 
   public subscribe = (
+    queue: QUEUE,
     callback: (data: Queue, ack: () => void) => Promise<void> | void,
   ) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
 
-    return this.channel.consume(QUEUE.RENDER, (message) => {
+    return this.channel.consume(queue, (message) => {
       if (!message) return;
 
       void callback(deserialize(message.content), () => {
