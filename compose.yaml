@@ -7,14 +7,18 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    restart: unless-stopped
 
   script-gen:
     build:
       context: .
       dockerfile: ./apps/script-gen/Dockerfile
+    depends_on:
+      - rabbitmq
     env_file: ./.env
     environment:
       RABBITMQ_HOSTNAME: rabbitmq
+    restart: unless-stopped
 
   renderer:
     build:
