@@ -1,55 +1,59 @@
 import type { Queue, QueueBase } from "api-schema/queue";
 
 import amqp from "amqplib";
-import invariant from "tiny-invariant";
 
 import { deserialize, serialize } from "./lib/serializer";
 import { QUEUE } from "./types";
 
-const ERROR_MSG_NOT_INITIALIZED = "Channel not initialized. Call init() first";
-
 type InitOptions = {
   prefetch?: number;
+  queue: QUEUE;
 };
 
 export class MessageQueue {
-  private ack = (message: amqp.ConsumeMessage) => {
-    invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
-    this.channel.ack(message);
+  private ack = (queue: QUEUE, message: amqp.ConsumeMessage) => {
+    const channel = this.getChannel(queue);
+    channel.ack(message);
   };
-  private channel?: amqp.Channel;
+  private channels: Map<QUEUE, amqp.Channel> = new Map();
 
   private connection: amqp.Connection;
 
-  public init = async ({ prefetch = 1 }: InitOptions = {}) => {
-    this.channel = await this.connection.createChannel();
+  private getChannel = (queue: QUEUE) => {
+    if (!this.channels.has(queue))
+      throw new Error(`Connection for ${queue} not initialized`);
 
-    await this.channel.assertQueue(QUEUE.RENDER);
-    await this.channel.prefetch(prefetch);
+    return this.channels.get(queue) as amqp.Channel;
+  };
+
+  public init = async ({ prefetch = 1, queue }: InitOptions) => {
+    const channel = await this.connection.createChannel();
+    this.channels.set(queue, channel);
+
+    await channel.assertQueue(queue);
+    await channel.prefetch(prefetch);
 
     return this;
   };
 
   public publish = (queue: QUEUE, data: QueueBase) => {
-    invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
+    const channel = this.getChannel(queue);
 
     const serialized = serialize(data);
-
-    this.channel.sendToQueue(queue, serialized);
+    channel.sendToQueue(queue, serialized);
   };
 
   public subscribe = (
     queue: QUEUE,
     callback: (data: Queue, ack: () => void) => Promise<void> | void,
   ) => {
-    invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
-
-    return this.channel.consume(queue, (message) => {
+    const channel = this.getChannel(queue);
+    return channel.consume(queue, (message) => {
       if (!message) return;
 
-      void callback(deserialize(message.content), () => {
-        this.ack(message);
-      });
+      void callback(deserialize(message.content), () =>
+        this.ack(queue, message),
+      );
     });
   };
 
