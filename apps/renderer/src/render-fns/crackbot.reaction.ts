@@ -19,8 +19,7 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
       count: 1000,
       splitBy: "duration",
     },
-    text: queue.payload.script,
-
+    text: queue.payload.script!,
     voice: queue.renderOptions.voice,
   });
 

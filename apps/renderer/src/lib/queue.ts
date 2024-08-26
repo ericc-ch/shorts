@@ -1,4 +1,4 @@
-import { amqplib, MessageQueue } from "message-queue";
+import { amqplib, MessageQueue, QUEUE } from "message-queue";
 
 import { RABBITMQ_HOSTNAME, RABBITMQ_PASSWORD, RABBITMQ_USERNAME } from "./env";
 
@@ -8,4 +8,6 @@ const connection = await amqplib.connect({
   username: RABBITMQ_USERNAME,
 });
 
-export const messageQueue = await new MessageQueue(connection).init();
+export const messageQueue = await new MessageQueue(connection).init({
+  queue: QUEUE.RENDER,
+});
