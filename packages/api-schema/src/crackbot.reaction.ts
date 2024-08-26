@@ -3,16 +3,11 @@ import { z } from "zod";
 import { metadata, renderOptions } from "./common";
 
 export const requestSchema = z.object({
+  renderOptions,
   url: z.string().url(),
 });
 
 export type Request = z.infer<typeof requestSchema>;
-
-export const gatewayRequestSchema = requestSchema.extend({
-  renderOptions,
-});
-
-export type GatewayRequest = z.infer<typeof gatewayRequestSchema>;
 
 export const responseSchema = z.object({
   meta: metadata,

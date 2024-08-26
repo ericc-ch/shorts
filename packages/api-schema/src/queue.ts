@@ -11,8 +11,9 @@ export enum VIDEO_TYPE {
 export interface QueueBase {
   id: string;
   isRendered: boolean;
+  isScriptGenerated: boolean;
   isUploaded: boolean;
-  metadata: Metadata;
+  metadata?: Metadata;
 
   payload: unknown;
 
@@ -23,11 +24,11 @@ export interface QueueBase {
 export interface QueueCrackBotReaction extends QueueBase {
   payload: {
     backgroundVideoPath?: string;
-
     backgroundVideoUrl: string;
-    script: string;
 
+    script?: string;
     scriptPath?: string;
+
     subtitles?: GenerateResult["subtitle"];
   };
   type: VIDEO_TYPE.CRACKBOT_REACTION;
