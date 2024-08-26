@@ -1,5 +1,7 @@
 import type { Queue } from "api-schema/queue";
+
 import { mkdir, rm } from "node:fs/promises";
+
 import { configPath, PUBLIC_DIR } from "./paths";
 
 type WriteConfigOption = {

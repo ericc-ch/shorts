@@ -2,9 +2,6 @@ import { z } from "zod";
 
 export const metadata = z
   .object({
-    title: z
-      .string()
-      .describe("The video title. Clickbait-y titles are recommended."),
     description: z
       .string()
       .describe(
@@ -18,6 +15,9 @@ export const metadata = z
         (tags) => new Set(tags).size === tags.length,
         "Tags must be unique.",
       ),
+    title: z
+      .string()
+      .describe("The video title. Clickbait-y titles are recommended."),
   })
   .strict()
   .describe("Metadata about the video. Used when uploading to YouTube.");

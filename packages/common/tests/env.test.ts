@@ -1,4 +1,5 @@
 import { describe, expect, it } from "bun:test";
+
 import { env } from "../src";
 
 describe("env()", () => {
@@ -10,7 +11,6 @@ describe("env()", () => {
 
     expect(env(key)).toBe(value);
 
-     
     delete import.meta.env[key];
   });
 

@@ -1,4 +1,5 @@
 import type { Hono } from "hono";
+
 import { readdir } from "node:fs/promises";
 
 type RouteModule = {

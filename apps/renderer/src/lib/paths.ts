@@ -1,4 +1,5 @@
 import { join } from "pathe";
+
 import { RENDER_OUTPUT } from "./env";
 
 export const PUBLIC_DIR = join(import.meta.dir, "../../public");

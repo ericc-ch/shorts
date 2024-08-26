@@ -1,5 +1,5 @@
 export enum QUEUE {
-  SCRIPT = "SCRIPT",
   RENDER = "RENDER",
+  SCRIPT = "SCRIPT",
   UPLOAD = "UPLOAD",
 }

@@ -1,7 +1,9 @@
 import type { Serve } from "bun";
+
 import { Hono } from "hono";
 import { basicAuth as basicAuthMiddleware } from "hono/basic-auth";
 import { logger } from "hono/logger";
+
 import {
   GATEWAY_AUTH_PASSWORD,
   GATEWAY_AUTH_USERNAME,
@@ -14,8 +16,8 @@ app.use("*", logger());
 app.use(
   "*",
   basicAuthMiddleware({
-    username: GATEWAY_AUTH_USERNAME,
     password: GATEWAY_AUTH_PASSWORD,
+    username: GATEWAY_AUTH_USERNAME,
   }),
 );
 

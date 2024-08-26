@@ -1,9 +1,11 @@
 import type { Serve } from "bun";
+
 import { Hono } from "hono";
 import { logger } from "hono/logger";
+
 import { SERVER_PORT_SCRIPT_GEN } from "./lib/env";
-import { routes } from "./routes";
 import { deleteUploadedFiles } from "./lib/files";
+import { routes } from "./routes";
 
 await deleteUploadedFiles();
 

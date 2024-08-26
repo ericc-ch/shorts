@@ -1,4 +1,5 @@
 import { describe, expect, it } from "bun:test";
+
 import { TempFileManager } from "../src";
 
 describe("TempFileManager", () => {

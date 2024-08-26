@@ -2,7 +2,7 @@ import consola from "consola";
 import { safeDestr } from "destr";
 
 interface Options {
-  fn: () => string | Promise<string>;
+  fn: () => Promise<string> | string;
   retries: number;
 }
 

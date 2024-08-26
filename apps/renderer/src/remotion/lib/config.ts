@@ -1,4 +1,5 @@
-import { VIDEO_TYPE, type Queue } from "api-schema/queue";
+import { type Queue, VIDEO_TYPE } from "api-schema/queue";
+
 import configJson from "~/public/config.json";
 
 // Needed for type casting

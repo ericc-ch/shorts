@@ -1,11 +1,11 @@
 import { tmpdir } from "node:os";
 
 interface Options {
-  url: string;
   paths?: string;
+  url: string;
 }
 
-export async function ytDlp({ url, paths }: Options) {
+export async function ytDlp({ paths, url }: Options) {
   const proc = Bun.spawn([
     "yt-dlp",
     "--paths",

@@ -2,6 +2,7 @@ import { generate } from "@ericc/edge-tts";
 import { type QueueCrackBotReaction } from "api-schema/queue";
 import { moveFile, ytDlp } from "common";
 import consola from "consola";
+
 import { RENDER_OUTPUT } from "../lib/env";
 import { writeConfig } from "../lib/files";
 import {
@@ -13,14 +14,14 @@ import { renderVideo } from "../lib/render-video";
 
 export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
   const { audio, subtitle } = await generate({
-    text: queue.payload.script,
     language: queue.renderOptions.language,
-    voice: queue.renderOptions.voice,
-
     subtitle: {
-      splitBy: "duration",
       count: 1000,
+      splitBy: "duration",
     },
+    text: queue.payload.script,
+
+    voice: queue.renderOptions.voice,
   });
 
   const scriptPath = assetAudioPath(queue.id);
@@ -37,9 +38,9 @@ export async function renderCrackBotReaction(queue: QueueCrackBotReaction) {
     ...queue,
     payload: {
       ...queue.payload,
-      subtitles: subtitle,
       backgroundVideoPath: file.name,
       scriptPath,
+      subtitles: subtitle,
     },
   };
 

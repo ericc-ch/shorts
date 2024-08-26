@@ -3,31 +3,31 @@ import { tmpdir } from "node:os";
 import { join } from "pathe";
 
 type BunWriteInput =
-  | Blob
-  | NodeJS.TypedArray
   | ArrayBufferLike
-  | string
-  | Bun.BlobPart[];
+  | Blob
+  | Bun.BlobPart[]
+  | NodeJS.TypedArray
+  | string;
 
 interface TempFileOptions {
   dir?: string;
-  prefix?: string;
   postfix?: string;
+  prefix?: string;
 }
 
 export class TempFileManager {
   private dir = tmpdir();
-  private prefix: string;
   private postfix: string;
+  private prefix: string;
+
+  private filePath = (name: string) =>
+    join(this.dir, this.prefix + name + this.postfix);
 
   constructor({ dir, postfix = "", prefix = "" }: TempFileOptions) {
     if (dir) this.dir = join(this.dir, dir);
     this.prefix = prefix;
     this.postfix = postfix;
   }
-
-  private filePath = (name: string) =>
-    join(this.dir, this.prefix + name + this.postfix);
 
   public async create(filename: string, data: BunWriteInput) {
     const filePath = this.filePath(filename);

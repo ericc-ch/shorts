@@ -5,6 +5,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+
 import { Word } from "./Word";
 
 interface Props {
@@ -16,22 +17,22 @@ export function Subtitle({ text }: Props) {
   const { fps } = useVideoConfig();
 
   const enter = spring({
-    frame,
-    fps,
     config: {
       damping: 200,
     },
     durationInFrames: 5,
+    fps,
+    frame,
   });
 
   // Overlay stroked text with normal text to create an effect where the stroke is outside
   return (
     <AbsoluteFill>
       <AbsoluteFill>
-        <Word stroke enterProgress={enter} text={text} />
+        <Word enterProgress={enter} stroke text={text} />
       </AbsoluteFill>
       <AbsoluteFill>
-        <Word enterProgress={enter} text={text} stroke={false} />
+        <Word enterProgress={enter} stroke={false} text={text} />
       </AbsoluteFill>
     </AbsoluteFill>
   );

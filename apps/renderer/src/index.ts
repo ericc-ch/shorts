@@ -1,6 +1,7 @@
 import { VIDEO_TYPE } from "api-schema/queue";
 import consola from "consola";
 import { exists, mkdir } from "node:fs/promises";
+
 import { clearAssets } from "./lib/files";
 import { PUBLIC_DIR } from "./lib/paths";
 import { renderQueue } from "./lib/queue";

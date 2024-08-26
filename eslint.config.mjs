@@ -1,12 +1,15 @@
 // @ts-check
 
 import eslint from "@eslint/js";
+import perfectionist from "eslint-plugin-perfectionist";
+import prettier from "eslint-plugin-prettier/recommended";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
     ignores: ["eslint.config.*"],
   },
+
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
 
@@ -18,4 +21,7 @@ export default tseslint.config(
       },
     },
   },
+
+  perfectionist.configs["recommended-natural"],
+  prettier,
 );

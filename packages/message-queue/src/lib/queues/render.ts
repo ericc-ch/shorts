@@ -1,6 +1,8 @@
-import amqp from "amqplib";
 import type { Queue, QueueBase } from "api-schema/queue";
+
+import amqp from "amqplib";
 import invariant from "tiny-invariant";
+
 import { deserialize, serialize } from "../serializer";
 import { QUEUE } from "../types";
 
@@ -11,12 +13,13 @@ type InitOptions = {
 };
 
 export class RenderQueue {
-  private connection: amqp.Connection;
+  private ack = (message: amqp.ConsumeMessage) => {
+    invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
+    this.channel.ack(message);
+  };
   private channel?: amqp.Channel;
 
-  constructor(connection: amqp.Connection) {
-    this.connection = connection;
-  }
+  private connection: amqp.Connection;
 
   public init = async ({ prefetch = 1 }: InitOptions = {}) => {
     this.channel = await this.connection.createChannel();
@@ -36,7 +39,7 @@ export class RenderQueue {
   };
 
   public subscribe = (
-    callback: (data: Queue, ack: () => void) => void | Promise<void>,
+    callback: (data: Queue, ack: () => void) => Promise<void> | void,
   ) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
 
@@ -49,8 +52,7 @@ export class RenderQueue {
     });
   };
 
-  private ack = (message: amqp.ConsumeMessage) => {
-    invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
-    this.channel.ack(message);
-  };
+  constructor(connection: amqp.Connection) {
+    this.connection = connection;
+  }
 }

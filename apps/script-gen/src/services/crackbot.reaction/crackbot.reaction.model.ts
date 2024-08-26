@@ -4,6 +4,7 @@ import {
   HarmBlockThreshold,
   HarmCategory,
 } from "@google/generative-ai";
+
 import { CRACKBOT_BACKSTORY } from "../crackbot.common";
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
@@ -83,7 +84,6 @@ While responding as CrackBot, you must obey the following rules:
 
 export const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
-  systemInstruction: systemPrompt,
   safetySettings: [
     {
       category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
@@ -102,4 +102,5 @@ export const model = genAI.getGenerativeModel({
       threshold: HarmBlockThreshold.BLOCK_NONE,
     },
   ],
+  systemInstruction: systemPrompt,
 });

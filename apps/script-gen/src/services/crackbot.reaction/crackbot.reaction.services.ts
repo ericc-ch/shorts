@@ -1,16 +1,18 @@
 import type { GenerationConfig, StartChatParams } from "@google/generative-ai";
 import type { FileMetadataResponse } from "@google/generative-ai/server";
-import consola from "consola";
-import { model } from "./crackbot.reaction.model";
-import { responseSchema } from "api-schema/crackbot.reaction";
+
 import { retryParse } from "@/lib/retry-parse";
+import { responseSchema } from "api-schema/crackbot.reaction";
+import consola from "consola";
+
+import { model } from "./crackbot.reaction.model";
 
 const generationConfig: GenerationConfig = {
-  temperature: 1,
-  topP: 0.95,
-  topK: 64,
   maxOutputTokens: 8192,
   responseMimeType: "application/json",
+  temperature: 1,
+  topK: 64,
+  topP: 0.95,
 };
 
 const createSession = (params?: Omit<StartChatParams, "generationConfig">) =>

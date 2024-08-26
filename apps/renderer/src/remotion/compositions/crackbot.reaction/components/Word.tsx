@@ -1,15 +1,16 @@
 import { makeTransform, scale, translateY } from "@remotion/animation-utils";
 import { fitText } from "@remotion/layout-utils";
 import { AbsoluteFill, interpolate, useVideoConfig } from "remotion";
+
 import { FONTS } from "~/src/remotion/lib/fonts";
 
 interface Props {
   enterProgress: number;
-  text: string;
   stroke: boolean;
+  text: string;
 }
 
-export function Word({ enterProgress, text, stroke }: Props) {
+export function Word({ enterProgress, stroke, text }: Props) {
   const { width } = useVideoConfig();
   const desiredFontSize = 120;
 
@@ -25,16 +26,16 @@ export function Word({ enterProgress, text, stroke }: Props) {
     <AbsoluteFill>
       <div
         style={{
-          fontSize,
           color: "white",
+          fontFamily: FONTS.PIXELIFY_SANS,
+          fontSize,
           textAlign: "center",
-          WebkitTextStroke: stroke ? "20px black" : undefined,
+          textTransform: "uppercase",
           transform: makeTransform([
             scale(interpolate(enterProgress, [0, 1], [0.8, 1])),
             translateY(interpolate(enterProgress, [0, 1], [50, 0])),
           ]),
-          fontFamily: FONTS.PIXELIFY_SANS,
-          textTransform: "uppercase",
+          WebkitTextStroke: stroke ? "20px black" : undefined,
         }}
       >
         {text}
