@@ -10,7 +10,7 @@ describe("env()", () => {
 
     expect(env(key)).toBe(value);
 
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+     
     delete import.meta.env[key];
   });
 

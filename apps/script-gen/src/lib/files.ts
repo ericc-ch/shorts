@@ -18,7 +18,7 @@ export async function deleteUploadedFiles() {
   const fileList = await filesManager.listFiles();
 
   const deletePromises =
-    fileList.files?.map((file) => filesManager.deleteFile(file.name)) ?? [];
+    fileList.files.map((file) => filesManager.deleteFile(file.name)) ?? [];
 
   await Promise.allSettled(deletePromises);
   consola.success("Deleted all uploaded files");

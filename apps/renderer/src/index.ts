@@ -12,7 +12,7 @@ const functionMap = new Map([
   [VIDEO_TYPE.CRACKBOT_REACTION, renderCrackBotReaction],
 ] as const);
 
-renderQueue.subscribe(async (data, ack) => {
+await renderQueue.subscribe(async (data, ack) => {
   consola.info(`Received render request: ${data.id}`);
 
   const func = functionMap.get(data.type);

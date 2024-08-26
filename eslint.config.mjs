@@ -8,7 +8,7 @@ export default tseslint.config(
     ignores: ["eslint.config.*"],
   },
   eslint.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
 
   {
     languageOptions: {

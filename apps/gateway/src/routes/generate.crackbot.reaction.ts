@@ -30,7 +30,7 @@ routes.post(
       },
     };
 
-    await renderQueue.publish(reactionQueue);
+    renderQueue.publish(reactionQueue);
     return c.json(response);
   },
 );

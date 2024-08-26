@@ -5,5 +5,5 @@ export function serialize<T>(data: T): Buffer {
 }
 
 export function deserialize<T>(data: Buffer): T {
-  return JSON.parse(data.toString());
+  return JSON.parse(data.toString()) as T;
 }

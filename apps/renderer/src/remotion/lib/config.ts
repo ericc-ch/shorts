@@ -13,6 +13,6 @@ export const getVideoDuration = () => {
       return config.payload.subtitles?.at(-1)?.end ?? 0;
 
     default:
-      throw new Error(`Unknown video type: ${config.type}`);
+      throw new Error(`Unknown video type: ${config.type as string}`);
   }
 };

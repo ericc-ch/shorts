@@ -27,7 +27,7 @@ export class RenderQueue {
     return this;
   };
 
-  public publish = async <Q extends QueueBase>(data: Q) => {
+  public publish = (data: QueueBase) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
 
     const serialized = serialize(data);
@@ -35,15 +35,17 @@ export class RenderQueue {
     this.channel.sendToQueue(QUEUE.RENDER, serialized);
   };
 
-  public subscribe = async (
+  public subscribe = (
     callback: (data: Queue, ack: () => void) => void | Promise<void>,
   ) => {
     invariant(this.channel, ERROR_MSG_NOT_INITIALIZED);
 
-    this.channel.consume(QUEUE.RENDER, (message) => {
+    return this.channel.consume(QUEUE.RENDER, (message) => {
       if (!message) return;
 
-      callback(deserialize(message.content), () => this.ack(message));
+      void callback(deserialize(message.content), () => {
+        this.ack(message);
+      });
     });
   };
 

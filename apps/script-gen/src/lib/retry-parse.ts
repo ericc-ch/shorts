@@ -16,7 +16,7 @@ export const retryParse = async ({ fn, retries }: Options) => {
       return result;
     } catch (e) {
       if (i < retries) {
-        consola.warn(`Failed to parse JSON: ${e}`);
+        consola.warn(`Failed to parse JSON: ${(e as Error).message}`);
       } else {
         throw e;
       }
