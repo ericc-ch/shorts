@@ -8,5 +8,6 @@
     "RABBITMQ",
     "remotionb",
     "tseslint"
-  ]
+  ],
+  "remote.autoForwardPortsFallback": 0
 }
