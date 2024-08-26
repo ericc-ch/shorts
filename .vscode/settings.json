@@ -6,6 +6,7 @@
     "pathe",
     "Pixelify",
     "RABBITMQ",
-    "remotionb"
+    "remotionb",
+    "tseslint"
   ]
 }

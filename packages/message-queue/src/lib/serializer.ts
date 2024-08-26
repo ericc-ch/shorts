@@ -1,3 +1,5 @@
+import { Buffer } from "node:buffer";
+
 export function serialize<T>(data: T): Buffer {
   return Buffer.from(JSON.stringify(data));
 }
