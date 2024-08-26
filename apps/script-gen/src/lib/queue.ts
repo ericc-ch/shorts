@@ -12,3 +12,4 @@ export const messageQueue = await new MessageQueue(connection).init({
   queue: QUEUE.SCRIPT,
 });
 await messageQueue.init({ queue: QUEUE.RENDER });
+await messageQueue.init({ queue: QUEUE.PROGRESS });

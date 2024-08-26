@@ -2,6 +2,7 @@ import { generate } from "@ericc/edge-tts";
 import { type QueueCrackBotReaction } from "api-schema/queue";
 import { moveFile, ytDlp } from "common";
 import consola from "consola";
+import { QUEUE } from "message-queue";
 
 import { RENDER_OUTPUT } from "../lib/env";
 import { writeConfig } from "../lib/files";
@@ -10,6 +11,7 @@ import {
   assetVideoPath,
   renderedVideoPath,
 } from "../lib/paths";
+import { messageQueue } from "../lib/queue";
 import { renderVideo } from "../lib/render-video";
 
 export async function crackbotReaction(queue: QueueCrackBotReaction) {
@@ -58,4 +60,11 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
     filename: `${config.id}.json`,
   });
   consola.success("Rendered configuration written");
+
+  const updatedQueue: QueueCrackBotReaction = {
+    ...config,
+    isRendered: true,
+  };
+
+  messageQueue.send(QUEUE.RENDER, updatedQueue);
 }

@@ -26,24 +26,7 @@ export class MessageQueue {
     return this.channels.get(queue) as amqp.Channel;
   };
 
-  public init = async ({ prefetch = 1, queue }: InitOptions) => {
-    const channel = await this.connection.createChannel();
-    this.channels.set(queue, channel);
-
-    await channel.assertQueue(queue);
-    await channel.prefetch(prefetch);
-
-    return this;
-  };
-
-  public publish = (queue: QUEUE, data: QueueBase) => {
-    const channel = this.getChannel(queue);
-
-    const serialized = serialize(data);
-    channel.sendToQueue(queue, serialized);
-  };
-
-  public subscribe = (
+  public consume = (
     queue: QUEUE,
     callback: (data: Queue, ack: () => void) => Promise<void> | void,
   ) => {
@@ -55,6 +38,23 @@ export class MessageQueue {
         this.ack(queue, message),
       );
     });
+  };
+
+  public init = async ({ prefetch = 1, queue }: InitOptions) => {
+    const channel = await this.connection.createChannel();
+    this.channels.set(queue, channel);
+
+    await channel.assertQueue(queue);
+    await channel.prefetch(prefetch);
+
+    return this;
+  };
+
+  public send = (queue: QUEUE, data: QueueBase) => {
+    const channel = this.getChannel(queue);
+
+    const serialized = serialize(data);
+    channel.sendToQueue(queue, serialized);
   };
 
   constructor(connection: amqp.Connection) {

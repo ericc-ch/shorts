@@ -9,7 +9,7 @@ import { renderFnsMap } from "./render-fns";
 
 if (!(await exists(PUBLIC_DIR))) await mkdir(PUBLIC_DIR);
 
-await messageQueue.subscribe(QUEUE.RENDER, async (data, ack) => {
+await messageQueue.consume(QUEUE.RENDER, async (data, ack) => {
   consola.info(`Received render request: ${data.id}`);
 
   const func = renderFnsMap.get(data.type);

@@ -4,7 +4,7 @@ import { QUEUE } from "message-queue";
 import { genFnsMap } from "./gen-fns";
 import { messageQueue } from "./lib/queue";
 
-await messageQueue.subscribe(QUEUE.SCRIPT, async (data, ack) => {
+await messageQueue.consume(QUEUE.SCRIPT, async (data, ack) => {
   consola.info(`Received generation request: ${data.id}`);
 
   const func = genFnsMap.get(data.type);
