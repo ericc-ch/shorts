@@ -6,13 +6,12 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.17.1",
-    "@hono/zod-validator": "^0.2.2",
     "@std/async": "npm:@jsr/std__async",
     "api-schema": "workspace:*",
     "common": "workspace:*",
     "consola": "^3.2.3",
     "destr": "^2.0.3",
-    "hono": "^4.5.8"
+    "message-queue": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "latest"

@@ -1,22 +1,17 @@
-import type { Serve } from "bun";
+import consola from "consola";
+import { QUEUE } from "message-queue";
 
-import { Hono } from "hono";
-import { logger } from "hono/logger";
+import { genFnsMap } from "./gen-fns";
+import { messageQueue } from "./lib/queue";
 
-import { SERVER_PORT_SCRIPT_GEN } from "./lib/env";
-import { deleteUploadedFiles } from "./lib/files";
-import { routes } from "./routes";
+await messageQueue.subscribe(QUEUE.SCRIPT, async (data, ack) => {
+  consola.info(`Received generation request: ${data.id}`);
 
-await deleteUploadedFiles();
+  const func = genFnsMap.get(data.type);
+  if (!func) throw new Error(`Unknown video type: ${data.type}`);
 
-const app = new Hono();
-app.use("*", logger());
+  await func(data);
+  consola.success(`Script generated: ${data.id}`);
 
-for (const route of routes) {
-  app.route("/", route);
-}
-
-export default {
-  fetch: app.fetch,
-  port: SERVER_PORT_SCRIPT_GEN,
-} satisfies Serve;
+  ack();
+});
