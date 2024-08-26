@@ -33,6 +33,7 @@ export function CrackBot({ audioSrc, maxRotation = 7 }: Props) {
   return (
     <svg
       fill="none"
+      style={{ overflow: "visible" }}
       viewBox="0 0 1680 1555"
       width="50%"
       xmlns="http://www.w3.org/2000/svg"
