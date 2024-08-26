@@ -19,14 +19,12 @@
     "@eslint/js": "^9.9.1",
     "@types/eslint__js": "^8.42.3",
     "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-perfectionist": "^3.2.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.3.3",
     "sort-package-json": "^2.10.1",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.2.0"
-  },
-  "dependencies": {
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-perfectionist": "^3.2.0",
-    "eslint-plugin-prettier": "^5.2.1"
   }
 }
