@@ -1,7 +1,6 @@
 import { messageQueue } from "@/lib/queue";
-import { generateCrackbotReaction } from "@/services/generate";
 import { zValidator } from "@hono/zod-validator";
-import { gatewayRequestSchema } from "api-schema/crackbot.reaction";
+import { requestSchema } from "api-schema/crackbot.reaction";
 import { type QueueCrackBotReaction, VIDEO_TYPE } from "api-schema/queue";
 import { Hono } from "hono";
 import { QUEUE } from "message-queue";
@@ -10,29 +9,26 @@ const routes = new Hono();
 
 routes.post(
   "/generate/crackbot/reaction",
-  zValidator("json", gatewayRequestSchema),
-  async (c) => {
+  zValidator("json", requestSchema),
+  (c) => {
     const validated = c.req.valid("json");
-
-    const response = await generateCrackbotReaction(validated);
 
     const reactionQueue: QueueCrackBotReaction = {
       id: globalThis.crypto.randomUUID(),
       isRendered: false,
+      isScriptGenerated: false,
       isUploaded: false,
-      metadata: response.meta,
 
       payload: {
         backgroundVideoUrl: validated.url,
-        script: response.script,
       },
 
       renderOptions: validated.renderOptions,
       type: VIDEO_TYPE.CRACKBOT_REACTION,
     };
 
-    messageQueue.publish(QUEUE.RENDER, reactionQueue);
-    return c.json(response);
+    messageQueue.publish(QUEUE.SCRIPT, reactionQueue);
+    return c.json(reactionQueue);
   },
 );
 
