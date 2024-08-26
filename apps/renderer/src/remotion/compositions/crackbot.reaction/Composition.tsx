@@ -4,7 +4,7 @@ import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 
 import { CrackBot } from "../../components/CrackBot";
 import { LoopedOffthreadVideo } from "../../components/LoopedOffthreadVideo";
-import { config, FRAME_IN_MS, getVideoDuration } from "../../lib/config";
+import { config, FRAME_IN_MS } from "../../lib/config";
 import { Subtitle } from "./components/Subtitle";
 
 export function CrackBotReaction() {
@@ -21,10 +21,9 @@ export function CrackBotReaction() {
     <AbsoluteFill style={{ backgroundColor: "white" }}>
       <AbsoluteFill>
         <LoopedOffthreadVideo
-          durationInFrames={Math.ceil(getVideoDuration() / FRAME_IN_MS)}
           src={videoSrc}
           style={{ objectFit: "cover" }}
-          volume={0.2}
+          volume={0.1}
         />
       </AbsoluteFill>
 
