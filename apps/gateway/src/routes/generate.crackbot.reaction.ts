@@ -4,6 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import { gatewayRequestSchema } from "api-schema/crackbot.reaction";
 import { type QueueCrackBotReaction, VIDEO_TYPE } from "api-schema/queue";
 import { Hono } from "hono";
+import { QUEUE } from "message-queue";
 
 const routes = new Hono();
 
@@ -30,7 +31,7 @@ routes.post(
       type: VIDEO_TYPE.CRACKBOT_REACTION,
     };
 
-    messageQueue.publish(reactionQueue);
+    messageQueue.publish(QUEUE.RENDER, reactionQueue);
     return c.json(response);
   },
 );
