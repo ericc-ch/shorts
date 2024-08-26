@@ -19,6 +19,7 @@ RUN apt install -y \
   libcups2
 
 RUN npm install -g bun
+RUN bunx remotionb browser ensure
 
 WORKDIR /app
 
@@ -27,7 +28,6 @@ COPY --parents packages/*/package.json ./
 COPY --parents apps/renderer/package.json ./
 
 RUN bun install
-RUN bunx remotionb browser ensure
 
 COPY . .
 
