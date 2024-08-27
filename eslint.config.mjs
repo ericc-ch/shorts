@@ -24,6 +24,7 @@ export default tseslint.config(
     },
     rules: {
       "perfectionist/sort-objects": ["error", { partitionByNewLine: true }],
+      "perfectionist/sort-interfaces": ["error", { partitionByNewLine: true }],
     },
   },
 
