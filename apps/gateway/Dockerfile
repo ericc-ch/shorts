@@ -14,4 +14,7 @@ COPY . .
 WORKDIR /app/apps/gateway
 
 # CMD [ "ash"]
+RUN bun run migration:generate
+RUN bun run migration:run
+
 CMD [ "bun", "run", "start" ]
