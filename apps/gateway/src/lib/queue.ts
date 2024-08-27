@@ -11,3 +11,4 @@ const connection = await amqplib.connect({
 export const messageQueue = await new MessageQueue(connection).init({
   queue: QUEUE.SCRIPT,
 });
+await messageQueue.init({ queue: QUEUE.PROGRESS });
