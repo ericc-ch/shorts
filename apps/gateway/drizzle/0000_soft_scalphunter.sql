@@ -7,5 +7,6 @@ CREATE TABLE `queue` (
 	`payload` text NOT NULL,
 	`render_options` text NOT NULL,
 	`metadata` text,
-	`created_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL
+	`created_at` integer NOT NULL,
+	`updated_at` integer NOT NULL
 );
