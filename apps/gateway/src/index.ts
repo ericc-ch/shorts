@@ -10,6 +10,7 @@ import {
   SERVER_PORT_GATEWAY,
 } from "./lib/env";
 import { routes } from "./routes";
+import { consumeProgress } from "./consume-progress";
 
 const app = new Hono();
 app.use("*", logger());
@@ -24,6 +25,8 @@ app.use(
 for (const route of routes) {
   app.route("/", route);
 }
+
+consumeProgress();
 
 export default {
   fetch: app.fetch,
