@@ -7,6 +7,11 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    hostname: rabbitmq-host
+    volumes:
+      - type: volume
+        source: rabbitmq_volume
+        target: /var/lib/rabbitmq
     restart: unless-stopped
 
   script-gen:
@@ -47,8 +52,16 @@ services:
     env_file: ./.env
     environment:
       RABBITMQ_HOSTNAME: rabbitmq
+    volumes:
+      - type: volume
+        source: database_volume
+        target: /app/
     expose:
       - ${SERVER_PORT_GATEWAY}
     ports:
       - ${SERVER_PORT_GATEWAY}:${SERVER_PORT_GATEWAY}
     restart: unless-stopped
+
+volumes:
+  database_volume:
+  rabbitmq_volume:
