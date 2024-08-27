@@ -52,11 +52,11 @@ services:
     env_file: ./.env
     environment:
       RABBITMQ_HOSTNAME: rabbitmq
-      DATABASE_DIR: /app/
+      DATABASE_DIR: /app/db/
     volumes:
       - type: volume
         source: database_volume
-        target: /app/
+        target: /app/db/
     expose:
       - ${SERVER_PORT_GATEWAY}
     ports:
