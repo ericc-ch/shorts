@@ -25,6 +25,9 @@ routes.post(
       renderOptions: validated.renderOptions,
 
       type: VIDEO_TYPE.CRACKBOT_REACTION,
+
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     });
 
     messageQueue.send(QUEUE.SCRIPT, queue);

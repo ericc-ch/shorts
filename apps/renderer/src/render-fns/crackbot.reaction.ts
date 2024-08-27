@@ -67,6 +67,8 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
   const updatedQueue: QueueCrackBotReaction = {
     ...config,
     isRendered: true,
+
+    updatedAt: Date.now(),
   };
 
   messageQueue.send(QUEUE.PROGRESS, updatedQueue);

@@ -22,8 +22,8 @@ export interface QueueBase {
 
   metadata?: Metadata | null;
 
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: number;
+  updatedAt: number;
 }
 
 export interface QueueCrackBotReaction extends QueueBase {

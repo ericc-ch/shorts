@@ -25,11 +25,14 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
   const updatedQueue: QueueCrackBotReaction = {
     ...queue,
     isScriptGenerated: true,
-    metadata: response.meta,
+
     payload: {
       ...queue.payload,
       script: response.script,
     },
+
+    metadata: response.meta,
+    updatedAt: Date.now(),
   };
 
   messageQueue.send(QUEUE.RENDER, updatedQueue);

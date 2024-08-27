@@ -4,7 +4,6 @@ import type {
   RenderOptions,
   VIDEO_TYPE,
 } from "api-schema/queue";
-import { sql } from "drizzle-orm";
 
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
@@ -28,10 +27,8 @@ export const queueTable = sqliteTable("queue", {
 
   metadata: text("metadata", { mode: "json" }).$type<Metadata>(),
 
-  createdAt: integer("created_at", { mode: "timestamp" })
-    .notNull()
-    .default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: integer("created_at", { mode: "timestamp" })
-    .notNull()
-    .default(sql`CURRENT_TIMESTAMP`),
+  // Not using { mode: "timestamp" } because of this issue
+  // https://github.com/drizzle-team/drizzle-orm/issues/2323
+  createdAt: integer("created_at").notNull(),
+  updatedAt: integer("updated_at").notNull(),
 });
