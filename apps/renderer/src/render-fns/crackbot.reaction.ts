@@ -26,14 +26,17 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
     volume: "+50%",
   });
 
-  const scriptPath = assetAudioPath(queue.id);
+  const scriptPath = assetAudioPath(queue.id.toString());
   await Bun.write(scriptPath, audio);
   consola.success(`Generated audio: ${scriptPath}`);
 
   const downloadedPath = await ytDlp({
     url: queue.payload.backgroundVideoUrl,
   });
-  const file = await moveFile(downloadedPath, assetVideoPath(queue.id));
+  const file = await moveFile(
+    downloadedPath,
+    assetVideoPath(queue.id.toString()),
+  );
   consola.success(`Downloaded video: ${file.name}`);
 
   const config: QueueCrackBotReaction = {
@@ -53,7 +56,7 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
 
   const blob = new Blob([result ?? new Blob()]);
 
-  await Bun.write(renderedVideoPath(queue.id), blob);
+  await Bun.write(renderedVideoPath(queue.id.toString()), blob);
 
   await writeConfig(config, {
     dir: RENDER_OUTPUT,
@@ -66,5 +69,5 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
     isRendered: true,
   };
 
-  messageQueue.send(QUEUE.RENDER, updatedQueue);
+  messageQueue.send(QUEUE.PROGRESS, updatedQueue);
 }

@@ -1,6 +1,7 @@
 import { type GenerateResult } from "@ericc/edge-tts";
 
 import type { Metadata, RenderOptions } from "./common";
+export * from "./common";
 
 export enum VIDEO_TYPE {
   CRACKBOT_REACTION,
@@ -9,16 +10,20 @@ export enum VIDEO_TYPE {
 }
 
 export interface QueueBase {
-  id: string;
-  isRendered: boolean;
-  isScriptGenerated: boolean;
-  isUploaded: boolean;
-  metadata?: Metadata;
+  id: number;
+  type: VIDEO_TYPE;
 
-  payload: unknown;
+  isScriptGenerated: boolean;
+  isRendered: boolean;
+  isUploaded: boolean;
 
   renderOptions: RenderOptions;
-  type: VIDEO_TYPE;
+  payload: unknown;
+
+  metadata?: Metadata | null;
+
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface QueueCrackBotReaction extends QueueBase {
