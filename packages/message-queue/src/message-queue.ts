@@ -44,7 +44,7 @@ export class MessageQueue {
     const channel = await this.connection.createChannel();
     this.channels.set(queue, channel);
 
-    await channel.assertQueue(queue);
+    await channel.assertQueue(queue, { durable: true });
     await channel.prefetch(prefetch);
 
     return this;
@@ -54,7 +54,7 @@ export class MessageQueue {
     const channel = this.getChannel(queue);
 
     const serialized = serialize(data);
-    channel.sendToQueue(queue, serialized);
+    channel.sendToQueue(queue, serialized, { persistent: true });
   };
 
   constructor(connection: amqp.Connection) {
