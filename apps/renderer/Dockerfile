@@ -27,7 +27,10 @@ COPY --parents packages/*/package.json ./
 COPY --parents apps/renderer/package.json ./
 
 RUN bun install
-RUN bunx remotionb browser ensure
+
+# Somehow doesn't work, will still download browser after this
+# Better download it once after the first request
+# RUN bunx remotionb browser ensure
 
 COPY . .
 
