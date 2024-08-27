@@ -2,9 +2,9 @@
   "name": "gateway",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "start": "bun run src/index.ts",
     "migration:generate": "npx drizzle-kit generate",
-    "migration:run": "bun run ./src/lib/db/migrate.ts"
+    "migration:run": "bun run ./src/lib/db/migrate.ts",
+    "start": "bun run src/index.ts"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",
