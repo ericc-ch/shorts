@@ -1,10 +1,10 @@
-import { Database } from "bun:sqlite";
-import { drizzle } from "drizzle-orm/bun-sqlite";
-
 import * as schema from "@/schemas";
-import { DB_PATH, DRIZZLE_PATH } from "../paths";
-import { migrate } from "drizzle-orm/bun-sqlite/migrator";
+import { Database } from "bun:sqlite";
 import consola from "consola";
+import { drizzle } from "drizzle-orm/bun-sqlite";
+import { migrate } from "drizzle-orm/bun-sqlite/migrator";
+
+import { DB_PATH, DRIZZLE_PATH } from "../paths";
 
 const connection = new Database(DB_PATH);
 

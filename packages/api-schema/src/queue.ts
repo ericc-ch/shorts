@@ -13,12 +13,12 @@ export interface QueueBase {
   id: number;
   type: VIDEO_TYPE;
 
-  isScriptGenerated: boolean;
   isRendered: boolean;
+  isScriptGenerated: boolean;
   isUploaded: boolean;
 
-  renderOptions: RenderOptions;
   payload: unknown;
+  renderOptions: RenderOptions;
 
   metadata?: Metadata | null;
 

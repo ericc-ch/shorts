@@ -1,7 +1,7 @@
 import { queueTable } from "@/schemas";
+import { desc, eq } from "drizzle-orm";
 
 import { db } from "../db";
-import { desc, eq } from "drizzle-orm";
 
 export async function insertQueue(queue: typeof queueTable.$inferInsert) {
   const result = await db.insert(queueTable).values(queue).returning();

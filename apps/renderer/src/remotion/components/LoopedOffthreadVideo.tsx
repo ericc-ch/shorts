@@ -18,11 +18,11 @@ export function LoopedOffthreadVideo(props: RemotionOffthreadVideoProps) {
     const { durationInSeconds } = await getVideoMetadata(props.src);
     setDuration(durationInSeconds);
     continueRender(handle);
-  }, []);
+  }, [handle, props.src]);
 
   useEffect(() => {
     void fetchData();
-  }, []);
+  }, [fetchData]);
 
   if (duration === undefined) return;
 

@@ -4,13 +4,13 @@ import { Hono } from "hono";
 import { basicAuth as basicAuthMiddleware } from "hono/basic-auth";
 import { logger } from "hono/logger";
 
+import { consumeProgress } from "./consume-progress";
 import {
   GATEWAY_AUTH_PASSWORD,
   GATEWAY_AUTH_USERNAME,
   SERVER_PORT_GATEWAY,
 } from "./lib/env";
 import { routes } from "./routes";
-import { consumeProgress } from "./consume-progress";
 
 const app = new Hono();
 app.use("*", logger());
