@@ -1,6 +1,12 @@
 import { env } from "common";
+import { join } from "pathe";
 
 export const SERVER_PORT_GATEWAY = env("SERVER_PORT_GATEWAY");
+
+export const DATABASE_DIR = env(
+  "DATABASE_DIR",
+  join(import.meta.dir, "../../"),
+);
 
 export const RABBITMQ_HOSTNAME = env("RABBITMQ_HOSTNAME");
 export const RABBITMQ_USERNAME = env("RABBITMQ_USERNAME");
