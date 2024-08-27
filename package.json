@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "bun run --env-file ./.env --filter './apps/**' dev",
     "format": "prettier --write .",
-    "lint": "eslint .",
+    "lint": "eslint . --cache",
     "sort-package-json": "sort-package-json './package.json' './apps/*/package.json' './packages/*/package.json'",
     "start": "bun run --env-file ./.env --filter './apps/**' start",
     "test": "bun run test:apps; bun run test:packages",
