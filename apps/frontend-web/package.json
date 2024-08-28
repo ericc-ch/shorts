@@ -7,7 +7,7 @@
     "build": "tsc -b && vite build",
     "dev": "vite",
     "lint": "eslint .",
-    "start": "sirv --host --single ./dist"
+    "start": "sirv ./dist --host --single"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
