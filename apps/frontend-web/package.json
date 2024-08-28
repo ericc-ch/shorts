@@ -7,7 +7,7 @@
     "build": "tsc -b && vite build",
     "dev": "vite",
     "lint": "eslint .",
-    "start": "sirv ./dist --host --single"
+    "start": "bunx serve ./dist --single"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -26,7 +26,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
-    "sirv-cli": "^2.0.2",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
