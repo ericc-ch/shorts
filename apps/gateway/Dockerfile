@@ -3,7 +3,7 @@ FROM oven/bun:1-alpine
 
 WORKDIR /app
 
-COPY package.json bun.lockb ./
+COPY package.json bun.lockb .npmrc ./
 COPY --parents packages/*/package.json ./
 COPY --parents apps/gateway/package.json ./
 
