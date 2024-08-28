@@ -1,4 +1,3 @@
-import { ObjectRenderer } from "@/components/ObjectRenderer";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -38,23 +37,30 @@ export function DialogDetails({
 
   return (
     <Dialog {...props}>
-      <DialogContent aria-describedby={undefined} className="md:max-w-[800px]">
+      <DialogContent aria-describedby={undefined} className="md:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>{queue?.metadata?.title}</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col md:flex-row gap-4 py-4">
           <video
-            className="w-80 h-full rounded-lg"
+            className="max-h-48 lg:max-h-80 rounded-lg"
             controls
-            src={videoUrl(queue?.id ?? 0)}
+            src={videoUrl(queue?.id as number)}
           >
             Your browser does not support the video tag.
           </video>
 
           <Separator className="hidden md:block" orientation="vertical" />
 
-          <div className="max-h-72 overflow-auto">
-            <ObjectRenderer data={queue} />
+          <div>
+            <p className="text-lg font-bold">Title</p>
+            <p>{queue?.metadata?.title}</p>
+
+            <p className="text-lg font-bold">Description</p>
+            <p>
+              {queue?.metadata?.description}{" "}
+              {queue?.metadata?.tags.map((tag) => `#${tag}`).join(" ")}
+            </p>
           </div>
         </div>
         <DialogFooter>
