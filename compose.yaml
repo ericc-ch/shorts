@@ -77,7 +77,7 @@ services:
         bind:
           create_host_path: true
         source: ${RENDER_OUTPUT}
-        target: /app/apps/frontend-web/public/out
+        target: /app/apps/frontend-web/dist/out
     ports:
       - 8080:8080
     restart: unless-stopped
