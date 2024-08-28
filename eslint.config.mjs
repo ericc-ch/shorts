@@ -4,6 +4,7 @@ import prettier from "eslint-plugin-prettier/recommended";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
+import query from "@tanstack/eslint-plugin-query";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -12,8 +13,9 @@ export default tseslint.config(
   {
     extends: [
       eslint.configs.recommended,
-      perfectionist.configs["recommended-natural"],
       ...tseslint.configs.recommended,
+      ...query.configs["flat/recommended"],
+      perfectionist.configs["recommended-natural"],
       prettier,
     ],
     languageOptions: {
@@ -45,4 +47,12 @@ export default tseslint.config(
       ],
     },
   },
+
+  // Somehow doesn't work, the file will match the above
+  // {
+  //   files: ["./apps/frontend-web/src/components/ui/*.tsx"],
+  //   rules: {
+  //     "react-refresh/only-export-components": "off",
+  //   },
+  // },
 );
