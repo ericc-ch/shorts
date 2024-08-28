@@ -11,7 +11,7 @@ COPY package.json bun.lockb .npmrc ./
 COPY --parents packages/*/package.json ./
 COPY --parents apps/frontend-web/package.json ./
 
-# RUN bun install
+RUN bun install
 
 COPY . .
 
