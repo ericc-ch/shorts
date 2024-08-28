@@ -1,13 +1,12 @@
+import { FormCrackbotReaction } from "@/components/Forms/FormCrackbotReaction";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -15,153 +14,59 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormEventHandler, useState } from "react";
+import { VIDEO_TYPE } from "api-schema/queue";
+import { PlusCircle } from "lucide-react";
+import { ReactNode, useState } from "react";
 
-const videoTypes = [
-  "Tutorial",
-  "Product Review",
-  "Vlog",
-  "News",
-  "Entertainment",
+const toFakeString = (type: VIDEO_TYPE) => type as unknown as string;
+
+const options = [
+  {
+    label: "Crackbot Reaction",
+    value: VIDEO_TYPE.CRACKBOT_REACTION,
+  },
 ];
-const voiceOptions = ["Male 1", "Female 1", "Male 2", "Female 2"];
-const languageOptions = ["English", "Spanish", "French", "German", "Japanese"];
+
+const formMap = new Map<VIDEO_TYPE, () => ReactNode>([
+  [VIDEO_TYPE.CRACKBOT_REACTION, FormCrackbotReaction],
+]);
 
 export function DialogNew() {
-  const [isNewVideoDialogOpen, setIsNewVideoDialogOpen] = useState(false);
-  const [newVideoData, setNewVideoData] = useState({
-    renderOptions: {
-      language: "",
-      voice: "",
-    },
-    videoType: "",
-    videoUrl: "",
-  });
+  const [selected, setSelected] = useState<string>();
 
-  const handleNewVideoSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    console.log("New video request:", newVideoData);
-    // Here you would typically send this data to your backend
-    setIsNewVideoDialogOpen(false);
-    // Reset form
-    setNewVideoData({
-      renderOptions: {
-        language: "",
-        voice: "",
-      },
-      videoType: "",
-      videoUrl: "",
-    });
-  };
+  const Form = formMap.get(selected as unknown as VIDEO_TYPE);
 
   return (
-    <Dialog onOpenChange={setIsNewVideoDialogOpen} open={isNewVideoDialogOpen}>
-      <DialogContent className="sm:max-w-[425px]">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button aria-label="Request new video generation">
+          <PlusCircle className="mr-2 h-4 w-4" /> New Video
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent aria-describedby={undefined} className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Request New Video Generation</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleNewVideoSubmit}>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label className="text-right" htmlFor="videoType">
-                Video Type
-              </Label>
-              <Select
-                onValueChange={(value) =>
-                  setNewVideoData({ ...newVideoData, videoType: value })
-                }
-                value={newVideoData.videoType}
-              >
-                <SelectTrigger className="col-span-3" id="videoType">
-                  <SelectValue placeholder="Select video type" />
-                </SelectTrigger>
-                <SelectContent>
-                  {videoTypes.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label className="text-right" htmlFor="videoUrl">
-                Video URL
-              </Label>
-              <Input
-                className="col-span-3"
-                id="videoUrl"
-                onChange={(e) =>
-                  setNewVideoData({
-                    ...newVideoData,
-                    videoUrl: e.target.value,
-                  })
-                }
-                placeholder="TikTok or YouTube URL"
-                value={newVideoData.videoUrl}
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label className="text-right" htmlFor="voice">
-                Voice
-              </Label>
-              <Select
-                onValueChange={(value) =>
-                  setNewVideoData({
-                    ...newVideoData,
-                    renderOptions: {
-                      ...newVideoData.renderOptions,
-                      voice: value,
-                    },
-                  })
-                }
-                value={newVideoData.renderOptions.voice}
-              >
-                <SelectTrigger className="col-span-3" id="voice">
-                  <SelectValue placeholder="Select voice" />
-                </SelectTrigger>
-                <SelectContent>
-                  {voiceOptions.map((voice) => (
-                    <SelectItem key={voice} value={voice}>
-                      {voice}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label className="text-right" htmlFor="language">
-                Language
-              </Label>
-              <Select
-                onValueChange={(value) =>
-                  setNewVideoData({
-                    ...newVideoData,
-                    renderOptions: {
-                      ...newVideoData.renderOptions,
-                      language: value,
-                    },
-                  })
-                }
-                value={newVideoData.renderOptions.language}
-              >
-                <SelectTrigger className="col-span-3" id="language">
-                  <SelectValue placeholder="Select language" />
-                </SelectTrigger>
-                <SelectContent>
-                  {languageOptions.map((language) => (
-                    <SelectItem key={language} value={language}>
-                      {language}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit">Submit Request</Button>
-          </DialogFooter>
-        </form>
+
+        <div className="grid gap-4">
+          <Select onValueChange={setSelected} value={selected}>
+            <SelectTrigger id="videoType">
+              <SelectValue placeholder="Select video type" />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((type) => (
+                <SelectItem key={type.value} value={toFakeString(type.value)}>
+                  {type.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {Form ?
+            <Form />
+          : undefined}
+        </div>
       </DialogContent>
     </Dialog>
   );

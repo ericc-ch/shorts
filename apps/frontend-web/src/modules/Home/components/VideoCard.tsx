@@ -12,18 +12,33 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useMarkQueueUploaded } from "@/lib/api/queues";
 import { videoUrl } from "@/lib/video-url";
 import { Queue } from "api-schema/queue";
 import { AlertCircle, CheckCircle, PlayCircle, Upload } from "lucide-react";
 import { MouseEventHandler } from "react";
 
 interface Props {
-  onMarkUploaded?: MouseEventHandler<HTMLButtonElement>;
+  onMarkUploadedSuccess?: MouseEventHandler<HTMLButtonElement>;
   onViewDetails?: MouseEventHandler<HTMLButtonElement>;
   queue: Queue;
 }
 
-export function VideoCard({ onMarkUploaded, onViewDetails, queue }: Props) {
+export function VideoCard({
+  onMarkUploadedSuccess,
+  onViewDetails,
+  queue,
+}: Props) {
+  const markAsUploaded = useMarkQueueUploaded();
+
+  const handleMarkUploaded = () => {
+    if (!queue) return;
+
+    markAsUploaded.mutate([queue.id], {
+      onSuccess: onMarkUploadedSuccess,
+    });
+  };
+
   return (
     <Card className="flex flex-col">
       <CardHeader>
@@ -92,7 +107,7 @@ export function VideoCard({ onMarkUploaded, onViewDetails, queue }: Props) {
               <TooltipTrigger asChild>
                 <Button
                   aria-label={`Mark ${queue.metadata?.title} as uploaded`}
-                  onClick={onMarkUploaded}
+                  onClick={handleMarkUploaded}
                   size="icon"
                   variant="outline"
                 >
