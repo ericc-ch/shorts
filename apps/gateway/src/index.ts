@@ -1,6 +1,7 @@
 import type { Serve } from "bun";
 
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import { consumeProgress } from "./consume-progress";
@@ -9,6 +10,7 @@ import { routes } from "./routes";
 
 const app = new Hono();
 app.use("*", logger());
+app.use("*", cors());
 
 for (const route of routes) {
   app.route("/", route);
