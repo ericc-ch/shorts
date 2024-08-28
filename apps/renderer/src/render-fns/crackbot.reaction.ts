@@ -4,7 +4,6 @@ import { moveFile, ytDlp } from "common";
 import consola from "consola";
 import { QUEUE } from "message-queue";
 
-import { RENDER_OUTPUT } from "../lib/env";
 import { writeConfig } from "../lib/files";
 import {
   assetAudioPath,
@@ -57,12 +56,6 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
   const blob = new Blob([result ?? new Blob()]);
 
   await Bun.write(renderedVideoPath(queue.id.toString()), blob);
-
-  await writeConfig(config, {
-    dir: RENDER_OUTPUT,
-    filename: `${config.id}.json`,
-  });
-  consola.success("Rendered configuration written");
 
   const updatedQueue: QueueCrackBotReaction = {
     ...config,
