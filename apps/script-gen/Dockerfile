@@ -5,7 +5,7 @@ ADD --chmod=777 https://github.com/yt-dlp/yt-dlp/releases/download/2024.08.06/yt
 
 WORKDIR /app
 
-COPY package.json bun.lockb ./
+COPY package.json bun.lockb .npmrc ./
 COPY --parents packages/*/package.json ./
 COPY --parents apps/script-gen/package.json ./
 
