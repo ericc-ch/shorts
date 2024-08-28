@@ -63,6 +63,25 @@ services:
       - ${SERVER_PORT_GATEWAY}:${SERVER_PORT_GATEWAY}
     restart: unless-stopped
 
+  frontend-web:
+    build:
+      context: .
+      dockerfile: ./apps/frontend-web/Dockerfile
+      args:
+        VITE_BASE_URL_GATEWAY: http://192.168.1.8:${SERVER_PORT_GATEWAY} # I need to learn more about networking
+    depends_on:
+      - gateway
+    env_file: ./.env
+    volumes:
+      - type: bind
+        bind:
+          create_host_path: true
+        source: ${RENDER_OUTPUT}
+        target: /app/apps/frontend-web/public/out
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
 volumes:
   database_volume:
   rabbitmq_volume:
