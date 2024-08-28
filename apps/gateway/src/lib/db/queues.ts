@@ -1,5 +1,5 @@
 import { queueTable } from "@/schemas";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, inArray } from "drizzle-orm";
 
 import { db } from "../db";
 
@@ -22,5 +22,16 @@ export function updateQueue(
     .update(queueTable)
     .set(queue)
     .where(eq(queueTable.id, id))
+    .returning();
+}
+
+export function markAsUploadedQueue(
+  ids: Array<number>,
+  queue: Partial<typeof queueTable.$inferInsert>,
+) {
+  return db
+    .update(queueTable)
+    .set(queue)
+    .where(inArray(queueTable.id, ids))
     .returning();
 }
