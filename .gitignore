@@ -16,5 +16,8 @@ out
 # SQLite DB
 *.db
 
-# Web Frontend Build
+# Web Frontend build dir
 dist/
+
+# Docker Compose config
+compose.yaml
