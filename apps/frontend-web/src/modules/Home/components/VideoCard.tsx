@@ -47,9 +47,12 @@ export function VideoCard({
       <CardContent className="flex-grow relative">
         {
           queue.isRendered ?
-            <div>This is the thumbnail for now</div>
+            <div>
+              This is the thumbnail for now{" "}
+              <a href={videoUrl(queue.id)}>Link to video</a>{" "}
+            </div>
             // <video
-            //   aria-label={`Preview of ${queue.metadata?.title}. Click to view details.`}
+            //   aria-label={`Preview of ${queue.metadata?.tikwtle}. Click to view details.`}
             //   autoPlay
             //   className="w-full h-48 object-cover rounded-md"
             //   loop
