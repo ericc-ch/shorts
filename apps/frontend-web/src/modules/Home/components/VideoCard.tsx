@@ -45,25 +45,28 @@ export function VideoCard({
         <CardTitle className="text-lg">{queue.metadata?.title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow relative">
-        {queue.isRendered ?
-          <video
-            aria-label={`Preview of ${queue.metadata?.title}. Click to view details.`}
-            autoPlay
-            className="w-full h-48 object-cover rounded-md"
-            loop
-            muted
-            playsInline
-            src={videoUrl(queue.id)}
-          >
-            Your browser does not support the video tag.
-          </video>
-        : <div className="w-full h-48 bg-muted flex items-center justify-center rounded-md">
-            <PlayCircle
-              aria-hidden="true"
-              className="h-12 w-12 text-muted-foreground"
-            />
-            <span className="sr-only">Video not rendered</span>
-          </div>
+        {
+          queue.isRendered ?
+            <div>This is the thumbnail for now</div>
+            // <video
+            //   aria-label={`Preview of ${queue.metadata?.title}. Click to view details.`}
+            //   autoPlay
+            //   className="w-full h-48 object-cover rounded-md"
+            //   loop
+            //   muted
+            //   playsInline
+            //   src={videoUrl(queue.id)}
+            // >
+            //   Your browser does not support the video tag.
+            // </video>
+          : <div className="w-full h-48 bg-muted flex items-center justify-center rounded-md">
+              <PlayCircle
+                aria-hidden="true"
+                className="h-12 w-12 text-muted-foreground"
+              />
+              <span className="sr-only">Video not rendered</span>
+            </div>
+
         }
       </CardContent>
 
