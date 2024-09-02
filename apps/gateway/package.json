@@ -7,6 +7,7 @@
     "start": "bun run src/index.ts"
   },
   "dependencies": {
+    "@ericc/env": "npm:@jsr/ericc__env",
     "@hono/zod-validator": "^0.2.2",
     "api-schema": "workspace:*",
     "common": "workspace:*",

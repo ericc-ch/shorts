@@ -1,4 +1,4 @@
-import { env } from "common";
+import { env } from "@ericc/env/bun";
 
 export const RABBITMQ_HOSTNAME = env("RABBITMQ_HOSTNAME");
 export const RABBITMQ_USERNAME = env("RABBITMQ_USERNAME");

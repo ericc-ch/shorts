@@ -1,4 +1,4 @@
-import { env } from "common";
+import { env } from "@ericc/env/bun";
 import { join } from "pathe";
 
 export const SERVER_PORT_GATEWAY = env("SERVER_PORT_GATEWAY");

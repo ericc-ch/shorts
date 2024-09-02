@@ -6,8 +6,9 @@
     "studio": "remotionb studio"
   },
   "dependencies": {
-    "@fontsource-variable/pixelify-sans": "^5.0.4",
     "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
+    "@ericc/env": "npm:@jsr/ericc__env",
+    "@fontsource-variable/pixelify-sans": "^5.0.4",
     "@remotion/animation-utils": "4.0.201",
     "@remotion/bundler": "^4.0.205",
     "@remotion/layout-utils": "4.0.202",
