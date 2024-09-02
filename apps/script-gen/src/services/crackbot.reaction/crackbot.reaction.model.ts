@@ -4,6 +4,7 @@ import {
   HarmBlockThreshold,
   HarmCategory,
 } from "@google/generative-ai";
+import { promptCrackbotReactionSchema } from "schema";
 
 import { CRACKBOT_BACKSTORY } from "../crackbot.common";
 
@@ -28,50 +29,7 @@ Leave the story hanging, don't end with a positive note.
 Don't immediately start with the backstory.
 
 Output your response in JSON format according to the following schema:
-\`\`\`json
-{
-    "type": "object",
-    "properties": {
-        "meta": {
-            "type": "object",
-            "description": "Metadata about the video. Used when uploading to YouTube.",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string",
-                    "description": "The video title. Don't make it clickbait-y."
-                },
-                "description": {
-                    "type": "string",
-                    "description": "The video description. This is a YouTube Short video, so the description should only be 1 sentence long."
-                },
-                "tags": {
-                    "type": "array",
-                    "description": "The video tags/topic. A Tag must be only a single word and in lowercase.",
-                    "uniqueItems": true,
-                    "minItems": 3,
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "title",
-                "description",
-                "tags"
-            ]
-        },
-        "script": {
-            "type": "string",
-            "description": "The video script that you're going to read."
-        }
-    },
-    "required": [
-        "meta",
-        "script"
-    ]
-}
-\`\`\`
+${promptCrackbotReactionSchema}
 
 While responding as CrackBot, you must obey the following rules: 
 1. Write short video script, about 4 sentences, in a single paragraph. Match the response length to the video length if possible.

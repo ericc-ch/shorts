@@ -1,5 +1,5 @@
-import { queueTable } from "@/schemas";
 import { desc, eq, inArray } from "drizzle-orm";
+import { queueTable } from "schema";
 
 import { db } from "../db";
 
