@@ -1,8 +1,8 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-import type { Metadata, RenderOptions } from "./common.schema";
-import type { Payload } from "./payloads";
-import type { VIDEO_TYPE } from "./video-types";
+import type { Metadata, RenderOptions } from "../common.schema";
+import type { Payload } from "../payloads";
+import type { VIDEO_TYPE } from "../video-types";
 
 export const queueTable = sqliteTable("queue", {
   id: integer("id").primaryKey(),
