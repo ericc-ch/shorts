@@ -2,8 +2,8 @@ import type { GenerationConfig, StartChatParams } from "@google/generative-ai";
 import type { FileMetadataResponse } from "@google/generative-ai/server";
 
 import { retryParse } from "@/lib/retry-parse";
-import { responseSchema } from "api-schema/crackbot.reaction";
 import consola from "consola";
+import { generatedCrackBotReaction } from "schema";
 
 import { model } from "./crackbot.reaction.model";
 
@@ -51,7 +51,7 @@ export const crackBotReaction = async ({ file }: CrackBotReactionOptions) => {
     `Got Gemini response: ${JSON.stringify(parsed).slice(0, 100)}`,
   );
 
-  const response = responseSchema.parse(parsed);
+  const response = generatedCrackBotReaction.parse(parsed);
   consola.success(`Gemini response successfully validated`);
 
   return response;

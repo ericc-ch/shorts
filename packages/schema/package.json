@@ -1,0 +1,14 @@
+{
+  "name": "schema",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
+    "drizzle-orm": "^0.33.0",
+    "drizzle-zod": "^0.5.1",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.2"
+  }
+}

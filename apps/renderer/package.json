@@ -15,6 +15,7 @@
     "@remotion/media-utils": "4.0.202",
     "@remotion/renderer": "^4.0.205",
     "common": "workspace:*",
+    "schema": "workspace:*",
     "consola": "^3.2.3",
     "message-queue": "workspace:*",
     "pathe": "^1.1.2",

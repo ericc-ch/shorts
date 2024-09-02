@@ -1,4 +1,4 @@
-import type { QueueCrackBotReaction } from "api-schema/queue";
+import type { Queue } from "schema";
 
 import { uploadPath, waitForFileActive } from "@/lib/files";
 import { messageQueue } from "@/lib/queue";
@@ -8,7 +8,7 @@ import consola from "consola";
 import { QUEUE } from "message-queue";
 import { rm } from "node:fs/promises";
 
-export async function crackbotReaction(queue: QueueCrackBotReaction) {
+export async function crackbotReaction(queue: Queue) {
   consola.info(`Downloading video: ${queue.payload.backgroundVideoUrl}`);
   const videoPath = await ytDlp({ url: queue.payload.backgroundVideoUrl });
 
@@ -22,7 +22,7 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
 
   const response = await crackBotReaction({ file: uploaded.file });
 
-  const updatedQueue: QueueCrackBotReaction = {
+  const updatedQueue: Queue = {
     ...queue,
     isScriptGenerated: true,
 

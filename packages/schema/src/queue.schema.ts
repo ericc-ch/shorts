@@ -1,13 +1,9 @@
-import type {
-  Metadata,
-  Queue,
-  RenderOptions,
-  VIDEO_TYPE,
-} from "api-schema/queue";
-
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-// Queue table
+import type { Metadata, RenderOptions } from "./common.schema";
+import type { Payload } from "./payloads";
+import type { VIDEO_TYPE } from "./video-types";
+
 export const queueTable = sqliteTable("queue", {
   id: integer("id").primaryKey(),
   type: integer("type").notNull().$type<VIDEO_TYPE>(),
@@ -18,9 +14,7 @@ export const queueTable = sqliteTable("queue", {
   }).notNull(),
   isUploaded: integer("is_uploaded", { mode: "boolean" }).notNull(),
 
-  payload: text("payload", { mode: "json" })
-    .notNull()
-    .$type<Queue["payload"]>(),
+  payload: text("payload", { mode: "json" }).notNull().$type<Payload>(),
   renderOptions: text("render_options", { mode: "json" })
     .notNull()
     .$type<RenderOptions>(),
@@ -32,3 +26,5 @@ export const queueTable = sqliteTable("queue", {
   createdAt: integer("created_at").notNull(),
   updatedAt: integer("updated_at").notNull(),
 });
+
+export type Queue = typeof queueTable.$inferSelect;

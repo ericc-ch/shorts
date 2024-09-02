@@ -1,7 +1,7 @@
 import { queues } from "@/lib/api/queues";
 import { useQuery } from "@tanstack/react-query";
-import { Queue } from "api-schema/queue";
 import { useState } from "react";
+import { Queue } from "schema";
 
 import { DialogDetails } from "./components/DialogDetails";
 import { DialogNew } from "./components/DialogNew";

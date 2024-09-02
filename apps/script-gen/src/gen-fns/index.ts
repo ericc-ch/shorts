@@ -1,4 +1,4 @@
-import { VIDEO_TYPE } from "api-schema/queue";
+import { VIDEO_TYPE } from "schema";
 
 import { crackbotReaction } from "./crackbot.reaction";
 

@@ -3,7 +3,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { Queue } from "api-schema/queue";
+import { Queue } from "schema";
 
 import { api } from "./api";
 

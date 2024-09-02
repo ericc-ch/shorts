@@ -10,8 +10,8 @@ import { Separator } from "@/components/ui/separator";
 import { useMarkQueueUploaded } from "@/lib/api/queues";
 import { videoUrl } from "@/lib/video-url";
 import { DialogProps } from "@radix-ui/react-dialog";
-import { Queue } from "api-schema/queue";
 import { MouseEventHandler } from "react";
+import { Queue } from "schema";
 
 interface Props extends DialogProps {
   onClose?: MouseEventHandler<HTMLButtonElement>;

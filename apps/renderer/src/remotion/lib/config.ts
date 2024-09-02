@@ -1,4 +1,4 @@
-import { type Queue, VIDEO_TYPE } from "api-schema/queue";
+import { type Queue, VIDEO_TYPE } from "schema";
 
 import configJson from "~/public/config.json";
 
@@ -14,6 +14,6 @@ export const getVideoDuration = () => {
       return config.payload.subtitles?.at(-1)?.end ?? 0;
 
     default:
-      throw new Error(`Unknown video type: ${config.type as string}`);
+      throw new Error(`Unknown video type: ${config.type}`);
   }
 };

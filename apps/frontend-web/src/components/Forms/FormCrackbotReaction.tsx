@@ -1,7 +1,8 @@
 import { useCreateCrackbotReaction } from "@/lib/api/crackbot.reaction";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Request, requestSchema } from "api-schema/crackbot.reaction";
 import { useForm } from "react-hook-form";
+import { payloadCrackBotReaction, renderOptions } from "schema";
+import { z } from "zod";
 
 import { Button } from "../ui/button";
 import {
@@ -16,21 +17,27 @@ import {
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 
+const formSchema = payloadCrackBotReaction.extend({
+  renderOptions: renderOptions,
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
 export function FormCrackbotReaction() {
   const createCrackbotReaction = useCreateCrackbotReaction();
 
-  const form = useForm<Request>({
+  const form = useForm<FormValues>({
     defaultValues: {
+      backgroundVideoUrl: "",
       renderOptions: {
         language: "en-US",
         voice: "en-US-BrianNeural",
       },
-      url: "",
     },
-    resolver: zodResolver(requestSchema),
+    resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (values: Request) => {
+  const onSubmit = (values: FormValues) => {
     createCrackbotReaction.mutate(values, {
       onSuccess: () => form.reset(),
     });
@@ -41,7 +48,7 @@ export function FormCrackbotReaction() {
       <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
-          name="url"
+          name="backgroundVideoUrl"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Video URL</FormLabel>

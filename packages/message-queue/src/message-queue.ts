@@ -1,4 +1,4 @@
-import type { Queue, QueueBase } from "api-schema/queue";
+import type { Queue } from "schema";
 
 import amqp from "amqplib";
 
@@ -50,7 +50,7 @@ export class MessageQueue {
     return this;
   };
 
-  public send = (queue: QUEUE, data: QueueBase) => {
+  public send = (queue: QUEUE, data: Queue) => {
     const channel = this.getChannel(queue);
 
     const serialized = serialize(data);

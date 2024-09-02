@@ -1,4 +1,4 @@
-import type { Queue } from "api-schema/queue";
+import type { Queue } from "schema";
 
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition } from "@remotion/renderer";

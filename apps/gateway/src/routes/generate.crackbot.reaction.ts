@@ -1,16 +1,19 @@
 import { insertQueue } from "@/lib/db/queues";
 import { messageQueue } from "@/lib/queue";
 import { zValidator } from "@hono/zod-validator";
-import { requestSchema } from "api-schema/crackbot.reaction";
-import { VIDEO_TYPE } from "api-schema/queue";
 import { Hono } from "hono";
 import { QUEUE } from "message-queue";
+import { payloadCrackBotReaction, renderOptions, VIDEO_TYPE } from "schema";
 
 const routes = new Hono();
 
+const schema = payloadCrackBotReaction.extend({
+  renderOptions,
+});
+
 routes.post(
   "/generate/crackbot/reaction",
-  zValidator("json", requestSchema),
+  zValidator("json", schema),
   async (c) => {
     const validated = c.req.valid("json");
 
@@ -20,7 +23,7 @@ routes.post(
       isUploaded: false,
 
       payload: {
-        backgroundVideoUrl: validated.url,
+        backgroundVideoUrl: validated.backgroundVideoUrl,
       },
       renderOptions: validated.renderOptions,
 

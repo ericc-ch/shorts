@@ -9,7 +9,7 @@
   "dependencies": {
     "@ericc/env": "npm:@jsr/ericc__env",
     "@hono/zod-validator": "^0.2.2",
-    "api-schema": "workspace:*",
+    "schema": "workspace:*",
     "common": "workspace:*",
     "consola": "^3.2.3",
     "drizzle-orm": "^0.33.0",

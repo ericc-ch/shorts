@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Request } from "api-schema/crackbot.reaction";
-import { QueueCrackBotReaction } from "api-schema/queue";
+import { PayloadCrackBotReaction, Queue } from "schema";
 
 import { api } from "./api";
 import { queues } from "./queues";
 
-const createCrackbotReaction = (body: Request) =>
-  api<QueueCrackBotReaction>("/generate/crackbot/reaction", {
+const createCrackbotReaction = (body: PayloadCrackBotReaction) =>
+  api<Queue>("/generate/crackbot/reaction", {
     body,
     method: "POST",
   });

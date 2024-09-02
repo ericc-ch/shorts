@@ -1,5 +1,6 @@
+import type { Queue } from "schema";
+
 import { generate } from "@ericc/edge-tts";
-import { type QueueCrackBotReaction } from "api-schema/queue";
 import { moveFile, ytDlp } from "common";
 import consola from "consola";
 import { QUEUE } from "message-queue";
@@ -13,7 +14,7 @@ import {
 import { messageQueue } from "../lib/queue";
 import { renderVideo } from "../lib/render-video";
 
-export async function crackbotReaction(queue: QueueCrackBotReaction) {
+export async function crackbotReaction(queue: Queue) {
   const { audio, subtitle } = await generate({
     language: queue.renderOptions.language,
     subtitle: {
@@ -38,7 +39,7 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
   );
   consola.success(`Downloaded video: ${file.name}`);
 
-  const config: QueueCrackBotReaction = {
+  const config: Queue = {
     ...queue,
     payload: {
       ...queue.payload,
@@ -57,7 +58,7 @@ export async function crackbotReaction(queue: QueueCrackBotReaction) {
 
   await Bun.write(renderedVideoPath(queue.id.toString()), blob);
 
-  const updatedQueue: QueueCrackBotReaction = {
+  const updatedQueue: Queue = {
     ...config,
     isRendered: true,
 

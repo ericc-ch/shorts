@@ -14,9 +14,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { VIDEO_TYPE } from "api-schema/queue";
 import { PlusCircle } from "lucide-react";
 import { ReactNode, useState } from "react";
+import { VIDEO_TYPE } from "schema";
 
 const toFakeString = (type: VIDEO_TYPE) => type as unknown as string;
 

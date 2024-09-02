@@ -14,9 +14,9 @@ import {
 } from "@/components/ui/tooltip";
 import { useMarkQueueUploaded } from "@/lib/api/queues";
 import { videoUrl } from "@/lib/video-url";
-import { Queue } from "api-schema/queue";
 import { AlertCircle, CheckCircle, PlayCircle, Upload } from "lucide-react";
 import { MouseEventHandler } from "react";
+import { Queue } from "schema";
 
 interface Props {
   onMarkUploadedSuccess?: MouseEventHandler<HTMLButtonElement>;
