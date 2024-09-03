@@ -18,8 +18,8 @@ await messageQueue.consume(QUEUE.RENDER, async (data, ack) => {
   await func(data);
   consola.success(`Rendered video: ${data.id}`);
 
-  ack();
+  // ack();
 
-  await clearAssets();
-  consola.info(`Cleared assets (public) folder`);
+  // await clearAssets();
+  // consola.info(`Cleared assets (public) folder`);
 });

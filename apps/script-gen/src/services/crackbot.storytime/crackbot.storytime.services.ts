@@ -1,11 +1,10 @@
 import type { GenerationConfig, StartChatParams } from "@google/generative-ai";
-import type { FileMetadataResponse } from "@google/generative-ai/server";
 
 import { retryParse } from "@/lib/retry-parse";
 import consola from "consola";
 import { generatedCrackBotStory } from "schema";
 
-import { model } from "./crackbot.reaction.model";
+import { model } from "./crackbot.storytime.model";
 
 const generationConfig: GenerationConfig = {
   maxOutputTokens: 8192,
@@ -21,21 +20,14 @@ const createSession = (params?: Omit<StartChatParams, "generationConfig">) =>
     generationConfig,
   });
 
-interface CrackBotReactionOptions {
-  file: FileMetadataResponse;
-}
-
-export const crackBotReaction = async ({ file }: CrackBotReactionOptions) => {
+export const crackBotStory = async () => {
   const getResponse = async () => {
     const session = createSession();
 
     consola.info(`Waiting for Gemini response: CrackBot Reaction`);
     const reply = await session.sendMessage([
       {
-        fileData: {
-          fileUri: file.uri,
-          mimeType: file.mimeType,
-        },
+        text: "Please generate a story about you",
       },
     ]);
 

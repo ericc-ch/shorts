@@ -3,9 +3,10 @@ import { tmpdir } from "node:os";
 interface Options {
   paths?: string;
   url: string;
+  withMusic?: string;
 }
 
-export async function ytDlp({ paths, url }: Options) {
+export async function ytDlp({ paths, url, withMusic }: Options) {
   const proc = Bun.spawn([
     "yt-dlp",
     "--paths",
@@ -14,6 +15,7 @@ export async function ytDlp({ paths, url }: Options) {
     `${globalThis.crypto.randomUUID()}.%(ext)s`,
     "--format",
     "mp4",
+    ...(withMusic ? ["-x"] : []),
     url,
   ]);
 

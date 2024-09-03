@@ -6,14 +6,14 @@
     "studio": "remotionb studio"
   },
   "dependencies": {
-    "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.3",
-    "@ericc/env": "npm:@jsr/ericc__env",
+    "@ericc/edge-tts": "npm:@jsr/ericc__edge-tts@0.0.7",
+    "@ericc/env": "npm:@jsr/ericc__env@0.0.1",
     "@fontsource-variable/pixelify-sans": "^5.0.4",
-    "@remotion/animation-utils": "4.0.201",
-    "@remotion/bundler": "^4.0.205",
-    "@remotion/layout-utils": "4.0.202",
-    "@remotion/media-utils": "4.0.202",
-    "@remotion/renderer": "^4.0.205",
+    "@remotion/animation-utils": "4.0.208",
+    "@remotion/bundler": "^4.0.208",
+    "@remotion/layout-utils": "4.0.208",
+    "@remotion/media-utils": "4.0.208",
+    "@remotion/renderer": "^4.0.208",
     "common": "workspace:*",
     "schema": "workspace:*",
     "consola": "^3.2.3",
@@ -21,11 +21,11 @@
     "pathe": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "remotion": "4.0.201",
+    "remotion": "4.0.208",
     "tsconfig-paths-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
-    "@remotion/cli": "4.0.202",
+    "@remotion/cli": "4.0.208",
     "@types/react": "^18.3.4"
   }
 }

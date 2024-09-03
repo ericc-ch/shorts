@@ -7,9 +7,9 @@ export const generatedCrackBotStory = z.object({
   meta: metadata,
   script: z
     .string()
-    .describe("The story script that you're going to read in the video."),
+    .describe("The reaction script that you're going to read in the video."),
 });
 
-export const promptCrackbotStorySchema = JSON.stringify(
+export const promptCrackbotReactionSchema = JSON.stringify(
   zodToJsonSchema(generatedCrackBotStory),
 );

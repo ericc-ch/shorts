@@ -1,4 +1,5 @@
 import { FormCrackbotReaction } from "@/components/Forms/FormCrackbotReaction";
+import { FormCrackbotStory } from "@/components/Forms/FormCrackbotStory";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -25,10 +26,15 @@ const options = [
     label: "Crackbot Reaction",
     value: VIDEO_TYPE.CRACKBOT_REACTION,
   },
+  {
+    label: "Crackbot Story",
+    value: VIDEO_TYPE.CRACKBOT_STORY,
+  },
 ];
 
 const formMap = new Map<VIDEO_TYPE, () => ReactNode>([
   [VIDEO_TYPE.CRACKBOT_REACTION, FormCrackbotReaction],
+  [VIDEO_TYPE.CRACKBOT_STORY, FormCrackbotStory],
 ]);
 
 export function DialogNew() {
