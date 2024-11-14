@@ -5,14 +5,14 @@
     "start": "bun run src/index.ts"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.17.2",
     "@ericc/env": "npm:@jsr/ericc__env",
-    "@google/generative-ai": "^0.17.1",
     "@std/async": "npm:@jsr/std__async",
-    "schema": "workspace:*",
     "common": "workspace:*",
     "consola": "^3.2.3",
     "destr": "^2.0.3",
-    "message-queue": "workspace:*"
+    "message-queue": "workspace:*",
+    "schema": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "latest"

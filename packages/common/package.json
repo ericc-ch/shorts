@@ -12,6 +12,6 @@
     "pathe": "^1.1.2"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.8"
+    "@types/bun": "^1.1.13"
   }
 }

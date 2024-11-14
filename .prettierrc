@@ -1,4 +1,3 @@
 {
-  "experimentalTernaries": true,
-  "endOfLine": "auto"
+  "experimentalTernaries": true
 }

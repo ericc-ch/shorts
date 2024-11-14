@@ -7,16 +7,16 @@
     "start": "bun run src/index.ts"
   },
   "dependencies": {
-    "@ericc/env": "npm:@jsr/ericc__env",
     "@hono/zod-validator": "^0.2.2",
-    "schema": "workspace:*",
+    "@ericc/env": "npm:@jsr/ericc__env",
     "common": "workspace:*",
     "consola": "^3.2.3",
     "drizzle-orm": "^0.33.0",
-    "hono": "^4.5.9",
+    "hono": "^4.6.10",
     "message-queue": "workspace:*",
-    "ofetch": "^1.3.4",
+    "ofetch": "^1.4.1",
     "pathe": "^1.1.2",
+    "schema": "workspace:*",
     "zod": "^3.23.8"
   },
   "devDependencies": {
