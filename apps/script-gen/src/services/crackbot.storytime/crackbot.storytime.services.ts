@@ -24,10 +24,10 @@ export const crackBotStory = async () => {
   const getResponse = async () => {
     const session = createSession();
 
-    consola.info(`Waiting for Gemini response: CrackBot Reaction`);
+    consola.info(`Waiting for Gemini response: CrackBot Story`);
     const reply = await session.sendMessage([
       {
-        text: "Please generate a story about you",
+        text: "Generate a short, engaging story about Crackbot (an AI character) in first person. The story should be entertaining, funny, and suitable for short-form video content. Include a title and description with hashtags. Format the response as JSON with 'script', 'title', and 'description' fields.",
       },
     ]);
 

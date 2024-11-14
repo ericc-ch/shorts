@@ -16,6 +16,9 @@ export function CrackBotStory() {
   const videoSrc = staticFile(
     config.payload.backgroundVideoPath?.split("/").at(-1) ?? "",
   );
+  const musicSrc = staticFile(
+    config.payload.musicVideoPath?.split("/").at(-1) ?? "",
+  );
 
   return (
     <AbsoluteFill style={{ backgroundColor: "white" }}>
@@ -28,6 +31,7 @@ export function CrackBotStory() {
       </AbsoluteFill>
 
       <Audio src={audioSrc} />
+      <Audio src={musicSrc} volume={0.3} />
 
       <AbsoluteFill style={{ left: "50%", top: "75%" }}>
         <CrackBot audioSrc={audioSrc} />
@@ -40,7 +44,7 @@ export function CrackBotStory() {
             from={subtitle.start / FRAME_IN_MS}
             key={index}
           >
-            <Subtitle text={subtitle.text} />O
+            <Subtitle text={subtitle.text} />
           </Sequence>
         ))}
       </AbsoluteFill>

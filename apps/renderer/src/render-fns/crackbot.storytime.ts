@@ -40,11 +40,11 @@ export async function crackbotStory(queue: Queue) {
   consola.success(`Downloaded video: ${videoFile.name}`);
 
   const downloadedMusicPath = await ytDlp({
-    url: queue.payload.backgroundVideoUrl,
+    url: queue.payload.musicVideoUrl,
   });
   const musicFile = await moveFile(
     downloadedMusicPath,
-    assetAudioPath(queue.id.toString()),
+    assetAudioPath(`${queue.id}_music`),
   );
   consola.success(`Downloaded music: ${musicFile.name}`);
 
@@ -62,18 +62,15 @@ export async function crackbotStory(queue: Queue) {
   await writeConfig(config);
   consola.success("Configuration written");
 
-  // const result = await renderVideo("CRACKBOTREACTION", queue);
+  const result = await renderVideo("CRACKBOTSTORY", queue);
+  const blob = new Blob([result ?? new Blob()]);
+  await Bun.write(renderedVideoPath(queue.id.toString()), blob);
 
-  // const blob = new Blob([result ?? new Blob()]);
+  const updatedQueue: Queue = {
+    ...config,
+    isRendered: true,
+    updatedAt: Date.now(),
+  };
 
-  // await Bun.write(renderedVideoPath(queue.id.toString()), blob);
-
-  // const updatedQueue: Queue = {
-  //   ...config,
-  //   isRendered: true,
-
-  //   updatedAt: Date.now(),
-  // };
-
-  // messageQueue.send(QUEUE.PROGRESS, updatedQueue);
+  messageQueue.send(QUEUE.PROGRESS, updatedQueue);
 }
