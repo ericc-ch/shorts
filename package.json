@@ -1,28 +1,27 @@
 {
   "name": "shorts",
   "type": "module",
-  "module": "index.ts",
   "scripts": {
     "lint": "eslint . --cache"
   },
   "dependencies": {
     "@fontsource-variable/pixelify-sans": "^5.1.1",
-    "@remotion/animation-utils": "4.0.246",
-    "@remotion/bundler": "^4.0.246",
-    "@remotion/layout-utils": "4.0.246",
-    "@remotion/media-utils": "4.0.246",
-    "@remotion/renderer": "^4.0.246",
-    "consola": "^3.3.3",
+    "@remotion/animation-utils": "4.0.249",
+    "@remotion/bundler": "^4.0.249",
+    "@remotion/layout-utils": "4.0.249",
+    "@remotion/media-utils": "4.0.249",
+    "@remotion/renderer": "^4.0.249",
+    "consola": "^3.4.0",
     "pathe": "^2.0.1",
     "react": "^18.3.1",
     "react-dom": "^19.0.0",
-    "remotion": "4.0.246",
+    "remotion": "4.0.249",
     "tsconfig-paths-webpack-plugin": "^4.2.0"
   },
   "devDependencies": {
-    "@echristian/eslint-config": "^0.0.13",
-    "@remotion/cli": "4.0.246",
-    "@types/react": "^19.0.4",
-    "eslint": "^9.17.0"
+    "@echristian/eslint-config": "^0.0.15",
+    "@remotion/cli": "4.0.249",
+    "@types/react": "^19.0.7",
+    "eslint": "^9.18.0"
   }
 }

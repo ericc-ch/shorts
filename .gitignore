@@ -21,3 +21,4 @@ dist/
 
 # Docker Compose config
 compose.yaml
+.aider*
