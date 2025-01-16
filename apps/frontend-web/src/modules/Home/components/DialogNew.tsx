@@ -1,25 +1,25 @@
-import { FormCrackbotReaction } from "@/components/Forms/FormCrackbotReaction";
-import { FormCrackbotStory } from "@/components/Forms/FormCrackbotStory";
-import { Button } from "@/components/ui/button";
+import { FormCrackbotReaction } from "@/components/Forms/FormCrackbotReaction"
+import { FormCrackbotStory } from "@/components/Forms/FormCrackbotStory"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { PlusCircle } from "lucide-react";
-import { ReactNode, useState } from "react";
-import { VIDEO_TYPE } from "schema";
+} from "@/components/ui/select"
+import { PlusCircle } from "lucide-react"
+import { ReactNode, useState } from "react"
+import { VIDEO_TYPE } from "schema"
 
-const toFakeString = (type: VIDEO_TYPE) => type as unknown as string;
+const toFakeString = (type: VIDEO_TYPE) => type as unknown as string
 
 const options = [
   {
@@ -30,17 +30,17 @@ const options = [
     label: "Crackbot Story",
     value: VIDEO_TYPE.CRACKBOT_STORY,
   },
-];
+]
 
 const formMap = new Map<VIDEO_TYPE, () => ReactNode>([
   [VIDEO_TYPE.CRACKBOT_REACTION, FormCrackbotReaction],
   [VIDEO_TYPE.CRACKBOT_STORY, FormCrackbotStory],
-]);
+])
 
 export function DialogNew() {
-  const [selected, setSelected] = useState<string>();
+  const [selected, setSelected] = useState<string>()
 
-  const Form = formMap.get(selected as unknown as VIDEO_TYPE);
+  const Form = formMap.get(selected as unknown as VIDEO_TYPE)
 
   return (
     <Dialog>
@@ -56,7 +56,7 @@ export function DialogNew() {
         </DialogHeader>
 
         <div className="grid gap-4">
-          <Select onValueChange={setSelected} value={selected}>
+          <Select value={selected} onValueChange={setSelected}>
             <SelectTrigger id="videoType">
               <SelectValue placeholder="Select video type" />
             </SelectTrigger>
@@ -75,5 +75,5 @@ export function DialogNew() {
         </div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

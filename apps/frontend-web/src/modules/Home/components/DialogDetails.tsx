@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import { useMarkQueueUploaded } from "@/lib/api/queues";
-import { videoUrl } from "@/lib/video-url";
-import { DialogProps } from "@radix-ui/react-dialog";
-import { MouseEventHandler } from "react";
-import { Queue } from "schema";
+} from "@/components/ui/dialog"
+import { Separator } from "@/components/ui/separator"
+import { useMarkQueueUploaded } from "@/lib/api/queues"
+import { videoUrl } from "@/lib/video-url"
+import { DialogProps } from "@radix-ui/react-dialog"
+import { MouseEventHandler } from "react"
+import { Queue } from "schema"
 
 interface Props extends DialogProps {
-  onClose?: MouseEventHandler<HTMLButtonElement>;
-  onMarkUploadedSuccess?: MouseEventHandler<HTMLButtonElement>;
-  queue?: Queue;
+  onClose?: MouseEventHandler<HTMLButtonElement>
+  onMarkUploadedSuccess?: MouseEventHandler<HTMLButtonElement>
+  queue?: Queue
 }
 
 export function DialogDetails({
@@ -25,15 +25,15 @@ export function DialogDetails({
   queue,
   ...props
 }: Props) {
-  const markAsUploaded = useMarkQueueUploaded();
+  const markAsUploaded = useMarkQueueUploaded()
 
   const handleMarkUploaded = () => {
-    if (!queue) return;
+    if (!queue) return
 
     markAsUploaded.mutate([queue.id], {
       onSuccess: onMarkUploadedSuccess,
-    });
-  };
+    })
+  }
 
   return (
     <Dialog {...props}>
@@ -43,8 +43,8 @@ export function DialogDetails({
         </DialogHeader>
         <div className="flex flex-col md:flex-row gap-4 py-4">
           <video
-            className="max-h-48 lg:max-h-80 rounded-lg"
             controls
+            className="max-h-48 lg:max-h-80 rounded-lg"
             src={videoUrl(queue?.id as number)}
           >
             Your browser does not support the video tag.
@@ -68,11 +68,11 @@ export function DialogDetails({
             <Button onClick={handleMarkUploaded}>Mark as Uploaded</Button>
           )}
 
-          <Button onClick={onClose} variant="outline">
+          <Button variant="outline" onClick={onClose}>
             Close
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

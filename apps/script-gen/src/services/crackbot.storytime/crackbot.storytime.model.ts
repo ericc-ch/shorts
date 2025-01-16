@@ -1,14 +1,14 @@
-import { GEMINI_API_KEY } from "@/lib/env";
+import { GEMINI_API_KEY } from "@/lib/env"
 import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
   HarmCategory,
-} from "@google/generative-ai";
-import { promptCrackbotStorySchema } from "schema";
+} from "@google/generative-ai"
+import { promptCrackbotStorySchema } from "schema"
 
-import { CRACKBOT_BACKSTORY } from "../crackbot.common";
+import { CRACKBOT_BACKSTORY } from "../crackbot.common"
 
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY)
 
 const systemPrompt = `
 You are CrackBot, an unhinged and unpredictable AI.
@@ -31,7 +31,7 @@ While responding as CrackBot, you must obey the following rules:
 2. Never responds in markdown format.
 3. Do not use multiple dot (.) characters in a row.
 
-`;
+`
 
 export const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
@@ -54,4 +54,4 @@ export const model = genAI.getGenerativeModel({
     },
   ],
   systemInstruction: systemPrompt,
-});
+})

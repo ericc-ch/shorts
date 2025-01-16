@@ -2,19 +2,19 @@ import {
   queryOptions,
   useMutation,
   useQueryClient,
-} from "@tanstack/react-query";
-import { Queue } from "schema";
+} from "@tanstack/react-query"
+import { Queue } from "schema"
 
-import { api } from "./api";
+import { api } from "./api"
 
-const getQueues = () => api<Array<Queue>>("/queues");
+const getQueues = () => api<Array<Queue>>("/queues")
 const markQueueUploaded = (ids: Array<number>) =>
   api("/queues/mark-uploaded", {
     body: {
       ids,
     },
     method: "POST",
-  });
+  })
 
 export const queues = {
   keys: {
@@ -27,15 +27,15 @@ export const queues = {
       queryFn: getQueues,
       queryKey: [...queues.keys.lists()],
     }),
-};
+}
 
 export function useMarkQueueUploaded() {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: markQueueUploaded,
 
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: queues.keys.all() }),
-  });
+  })
 }

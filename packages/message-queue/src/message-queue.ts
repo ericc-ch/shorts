@@ -1,63 +1,63 @@
-import type { Queue } from "schema";
+import type { Queue } from "schema"
 
-import amqp from "amqplib";
+import amqp from "amqplib"
 
-import { deserialize, serialize } from "./lib/serializer";
-import { QUEUE } from "./types";
+import { deserialize, serialize } from "./lib/serializer"
+import { QUEUE } from "./types"
 
-type InitOptions = {
-  prefetch?: number;
-  queue: QUEUE;
-};
+interface InitOptions {
+  prefetch?: number
+  queue: QUEUE
+}
 
 export class MessageQueue {
   private ack = (queue: QUEUE, message: amqp.ConsumeMessage) => {
-    const channel = this.getChannel(queue);
-    channel.ack(message);
-  };
-  private channels: Map<QUEUE, amqp.Channel> = new Map();
+    const channel = this.getChannel(queue)
+    channel.ack(message)
+  }
+  private channels = new Map<QUEUE, amqp.Channel>()
 
-  private connection: amqp.Connection;
+  private connection: amqp.Connection
 
   private getChannel = (queue: QUEUE) => {
     if (!this.channels.has(queue))
-      throw new Error(`Connection for ${queue} not initialized`);
+      throw new Error(`Connection for ${queue} not initialized`)
 
-    return this.channels.get(queue) as amqp.Channel;
-  };
+    return this.channels.get(queue) as amqp.Channel
+  }
 
   public consume = (
     queue: QUEUE,
     callback: (data: Queue, ack: () => void) => Promise<void> | void,
   ) => {
-    const channel = this.getChannel(queue);
+    const channel = this.getChannel(queue)
     return channel.consume(queue, (message) => {
-      if (!message) return;
+      if (!message) return
 
-      void callback(deserialize(message.content), () =>
-        this.ack(queue, message),
-      );
-    });
-  };
+      void callback(deserialize(message.content), () => {
+        this.ack(queue, message)
+      })
+    })
+  }
 
   public init = async ({ prefetch = 1, queue }: InitOptions) => {
-    const channel = await this.connection.createChannel();
-    this.channels.set(queue, channel);
+    const channel = await this.connection.createChannel()
+    this.channels.set(queue, channel)
 
-    await channel.assertQueue(queue, { durable: true });
-    await channel.prefetch(prefetch);
+    await channel.assertQueue(queue, { durable: true })
+    await channel.prefetch(prefetch)
 
-    return this;
-  };
+    return this
+  }
 
   public send = (queue: QUEUE, data: Queue) => {
-    const channel = this.getChannel(queue);
+    const channel = this.getChannel(queue)
 
-    const serialized = serialize(data);
-    channel.sendToQueue(queue, serialized, { persistent: true });
-  };
+    const serialized = serialize(data)
+    channel.sendToQueue(queue, serialized, { persistent: true })
+  }
 
   constructor(connection: amqp.Connection) {
-    this.connection = connection;
+    this.connection = connection
   }
 }

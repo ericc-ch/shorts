@@ -1,49 +1,49 @@
-import { rm } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { join } from "pathe";
+import { rm } from "node:fs/promises"
+import { tmpdir } from "node:os"
+import { join } from "pathe"
 
 type BunWriteInput =
   | ArrayBufferLike
   | Blob
-  | Bun.BlobPart[]
+  | Array<Bun.BlobPart>
   | NodeJS.TypedArray
-  | string;
+  | string
 
 interface TempFileOptions {
-  dir?: string;
-  postfix?: string;
-  prefix?: string;
+  dir?: string
+  postfix?: string
+  prefix?: string
 }
 
 export class TempFileManager {
-  private dir = tmpdir();
-  private postfix: string;
-  private prefix: string;
+  private dir = tmpdir()
+  private postfix: string
+  private prefix: string
 
   private filePath = (name: string) =>
-    join(this.dir, this.prefix + name + this.postfix);
+    join(this.dir, this.prefix + name + this.postfix)
 
   constructor({ dir, postfix = "", prefix = "" }: TempFileOptions) {
-    if (dir) this.dir = join(this.dir, dir);
-    this.prefix = prefix;
-    this.postfix = postfix;
+    if (dir) this.dir = join(this.dir, dir)
+    this.prefix = prefix
+    this.postfix = postfix
   }
 
   public async create(filename: string, data: BunWriteInput) {
-    const filePath = this.filePath(filename);
-    await Bun.write(filePath, data);
+    const filePath = this.filePath(filename)
+    await Bun.write(filePath, data)
 
-    return filePath;
+    return filePath
   }
 
   public async delete(filename: string) {
-    const filePath = this.filePath(filename);
-    await rm(filePath);
+    const filePath = this.filePath(filename)
+    await rm(filePath)
   }
 
   public async deleteAll() {
     if (this.dir === tmpdir())
-      throw new Error("Can't delete all files when using default tmpdir");
-    await rm(this.dir, { recursive: true });
+      throw new Error("Can't delete all files when using default tmpdir")
+    await rm(this.dir, { recursive: true })
   }
 }

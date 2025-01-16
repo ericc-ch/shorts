@@ -1,8 +1,8 @@
-import { Composition } from "remotion";
+import { Composition } from "remotion"
 
-import { CrackBotReaction } from "./compositions/crackbot.reaction";
-import { CrackBotStory } from "./compositions/crackbot.storytime";
-import { FPS, FRAME_IN_MS, getVideoDuration } from "./lib/config";
+import { CrackBotReaction } from "./compositions/crackbot.reaction"
+import { CrackBotStory } from "./compositions/crackbot.storytime"
+import { FPS, FRAME_IN_MS, getVideoDuration } from "./lib/config"
 
 export const RemotionRoot = () => (
   <>
@@ -24,4 +24,4 @@ export const RemotionRoot = () => (
       width={1080}
     />
   </>
-);
+)

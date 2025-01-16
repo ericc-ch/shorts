@@ -1,27 +1,27 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useMarkQueueUploaded } from "@/lib/api/queues";
-import { videoUrl } from "@/lib/video-url";
-import { AlertCircle, CheckCircle, PlayCircle, Upload } from "lucide-react";
-import { MouseEventHandler } from "react";
-import { Queue } from "schema";
+} from "@/components/ui/tooltip"
+import { useMarkQueueUploaded } from "@/lib/api/queues"
+import { videoUrl } from "@/lib/video-url"
+import { AlertCircle, CheckCircle, PlayCircle, Upload } from "lucide-react"
+import { MouseEventHandler } from "react"
+import { Queue } from "schema"
 
 interface Props {
-  onMarkUploadedSuccess?: MouseEventHandler<HTMLButtonElement>;
-  onViewDetails?: MouseEventHandler<HTMLButtonElement>;
-  queue: Queue;
+  onMarkUploadedSuccess?: MouseEventHandler<HTMLButtonElement>
+  onViewDetails?: MouseEventHandler<HTMLButtonElement>
+  queue: Queue
 }
 
 export function VideoCard({
@@ -29,15 +29,15 @@ export function VideoCard({
   onViewDetails,
   queue,
 }: Props) {
-  const markAsUploaded = useMarkQueueUploaded();
+  const markAsUploaded = useMarkQueueUploaded()
 
   const handleMarkUploaded = () => {
-    if (!queue) return;
+    if (!queue) return
 
     markAsUploaded.mutate([queue.id], {
       onSuccess: onMarkUploadedSuccess,
-    });
-  };
+    })
+  }
 
   return (
     <Card className="flex flex-col">
@@ -102,8 +102,8 @@ export function VideoCard({
         <div className="flex gap-2 w-full">
           <Button
             className="flex-grow"
-            onClick={onViewDetails}
             variant="outline"
+            onClick={onViewDetails}
           >
             View Details
           </Button>
@@ -113,9 +113,9 @@ export function VideoCard({
               <TooltipTrigger asChild>
                 <Button
                   aria-label={`Mark ${queue.metadata?.title} as uploaded`}
-                  onClick={handleMarkUploaded}
                   size="icon"
                   variant="outline"
+                  onClick={handleMarkUploaded}
                 >
                   <Upload aria-hidden="true" className="h-4 w-4" />
                 </Button>
@@ -128,5 +128,5 @@ export function VideoCard({
         </div>
       </CardFooter>
     </Card>
-  );
+  )
 }

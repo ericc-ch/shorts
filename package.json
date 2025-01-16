@@ -19,7 +19,7 @@
     "tsconfig-paths-webpack-plugin": "^4.2.0"
   },
   "devDependencies": {
-    "@echristian/eslint-config": "^0.0.15",
+    "@echristian/eslint-config": "^0.0.16",
     "@remotion/cli": "4.0.249",
     "@types/react": "^19.0.7",
     "eslint": "^9.18.0"

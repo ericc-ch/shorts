@@ -78,4 +78,4 @@ export const MIME_TYPES = {
     WASM: "application/wasm",
     XML: "application/xml",
   },
-} as const;
+} as const

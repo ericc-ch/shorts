@@ -1,26 +1,26 @@
-import { makeTransform, scale, translateY } from "@remotion/animation-utils";
-import { fitText } from "@remotion/layout-utils";
-import { AbsoluteFill, interpolate, useVideoConfig } from "remotion";
+import { makeTransform, scale, translateY } from "@remotion/animation-utils"
+import { fitText } from "@remotion/layout-utils"
+import { AbsoluteFill, interpolate, useVideoConfig } from "remotion"
 
-import { FONTS } from "~/src/remotion/lib/fonts";
+import { FONTS } from "~/src/remotion/lib/fonts"
 
 interface Props {
-  enterProgress: number;
-  stroke: boolean;
-  text: string;
+  enterProgress: number
+  stroke: boolean
+  text: string
 }
 
 export function Word({ enterProgress, stroke, text }: Props) {
-  const { width } = useVideoConfig();
-  const desiredFontSize = 120;
+  const { width } = useVideoConfig()
+  const desiredFontSize = 120
 
   const fittedText = fitText({
     fontFamily: FONTS.PIXELIFY_SANS,
     text,
     withinWidth: width * 0.8,
-  });
+  })
 
-  const fontSize = Math.min(desiredFontSize, fittedText.fontSize);
+  const fontSize = Math.min(desiredFontSize, fittedText.fontSize)
 
   return (
     <AbsoluteFill>
@@ -41,5 +41,5 @@ export function Word({ enterProgress, stroke, text }: Props) {
         {text}
       </div>
     </AbsoluteFill>
-  );
+  )
 }

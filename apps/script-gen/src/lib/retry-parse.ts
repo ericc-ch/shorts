@@ -1,25 +1,25 @@
-import consola from "consola";
-import { safeDestr } from "destr";
+import consola from "consola"
+import { safeDestr } from "destr"
 
 interface Options {
-  fn: () => Promise<string> | string;
-  retries: number;
+  fn: () => Promise<string> | string
+  retries: number
 }
 
 export const retryParse = async ({ fn, retries }: Options) => {
   for (let i = 0; i < retries; i++) {
     try {
-      consola.info(`Parsing JSON: attempt ${i + 1}/${retries}`);
-      const jsonString = await fn();
-      const result = safeDestr(jsonString);
+      consola.info(`Parsing JSON: attempt ${i + 1}/${retries}`)
+      const jsonString = await fn()
+      const result = safeDestr(jsonString)
 
-      return result;
+      return result
     } catch (e) {
       if (i < retries) {
-        consola.warn(`Failed to parse JSON: ${(e as Error).message}`);
+        consola.warn(`Failed to parse JSON: ${(e as Error).message}`)
       } else {
-        throw e;
+        throw e
       }
     }
   }
-};
+}

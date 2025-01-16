@@ -1,9 +1,9 @@
-import { Buffer } from "node:buffer";
+import { Buffer } from "node:buffer"
 
 export function serialize<T>(data: T): Buffer {
-  return Buffer.from(JSON.stringify(data));
+  return Buffer.from(JSON.stringify(data))
 }
 
 export function deserialize<T>(data: Buffer): T {
-  return JSON.parse(data.toString()) as T;
+  return JSON.parse(data.toString()) as T
 }

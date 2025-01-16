@@ -1,1 +1,1 @@
-export const videoUrl = (id: number | string) => `/out/${id}.mp4`;
+export const videoUrl = (id: number | string) => `/out/${id}.mp4`

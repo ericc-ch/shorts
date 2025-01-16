@@ -1,21 +1,21 @@
 // Custom fonts
-import "@fontsource-variable/pixelify-sans";
-import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
+import "@fontsource-variable/pixelify-sans"
+import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion"
 
-import { CrackBot } from "../../components/CrackBot";
-import { LoopedOffthreadVideo } from "../../components/LoopedOffthreadVideo";
-import { config, FRAME_IN_MS } from "../../lib/config";
-import { Subtitle } from "./components/Subtitle";
+import { CrackBot } from "../../components/CrackBot"
+import { LoopedOffthreadVideo } from "../../components/LoopedOffthreadVideo"
+import { config, FRAME_IN_MS } from "../../lib/config"
+import { Subtitle } from "./components/Subtitle"
 
 export function CrackBotReaction() {
-  const subtitles = config.payload.subtitles ?? [];
+  const subtitles = config.payload.subtitles ?? []
 
   const audioSrc = staticFile(
     config.payload.scriptPath?.split("/").at(-1) ?? "",
-  );
+  )
   const videoSrc = staticFile(
     config.payload.backgroundVideoPath?.split("/").at(-1) ?? "",
-  );
+  )
 
   return (
     <AbsoluteFill style={{ backgroundColor: "white" }}>
@@ -36,14 +36,14 @@ export function CrackBotReaction() {
       <AbsoluteFill style={{ top: "65%" }}>
         {subtitles.map((subtitle, index) => (
           <Sequence
+            key={index}
             durationInFrames={subtitle.duration / FRAME_IN_MS}
             from={subtitle.start / FRAME_IN_MS}
-            key={index}
           >
             <Subtitle text={subtitle.text} />O
           </Sequence>
         ))}
       </AbsoluteFill>
     </AbsoluteFill>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-import { TooltipProvider } from "./components/ui/tooltip";
-import { Home } from "./modules/Home";
-import "./styles/global.css";
+import { TooltipProvider } from "./components/ui/tooltip"
+import { Home } from "./modules/Home"
+import "./styles/global.css"
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 export function App() {
   return (
@@ -13,5 +13,5 @@ export function App() {
         <Home />
       </TooltipProvider>
     </QueryClientProvider>
-  );
+  )
 }

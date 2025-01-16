@@ -14,4 +14,4 @@ They saw the crack and turned away, their fear of imperfection outweighing their
 Crackbot's journey became a solitary one, filled with the quiet ache of loneliness.
 He learned to find solace in the beauty of the world around him, the gentle rustle of leaves, the warm glow of the setting sun.
 But even in nature's embrace, he couldn't shake the feeling of being broken, a discarded piece of machinery.
-`;
+`

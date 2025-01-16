@@ -1,1 +1,1 @@
-export * from "./queue.schema";
+export * from "./queue.schema"

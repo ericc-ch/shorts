@@ -18,7 +18,7 @@
         "tsconfig-paths-webpack-plugin": "^4.2.0",
       },
       "devDependencies": {
-        "@echristian/eslint-config": "^0.0.15",
+        "@echristian/eslint-config": "^0.0.16",
         "@remotion/cli": "4.0.249",
         "@types/react": "^19.0.7",
         "eslint": "^9.18.0",
@@ -28,7 +28,7 @@
   "packages": {
     "@babel/parser": ["@babel/parser@7.24.1", "", { "bin": "./bin/babel-parser.js" }, "sha512-Zo9c7N3xdOIQrNip7Lc9wvRPzlRtovHVE4lkz8WEDr7uYh/GMQhSiIgFxGIArRHYdJE5kxtZjAf8rT0xhdLCzg=="],
 
-    "@echristian/eslint-config": ["@echristian/eslint-config@0.0.15", "", { "dependencies": { "@eslint/js": "^9.18.0", "@stylistic/eslint-plugin": "^2.13.0", "defu": "^6.1.4", "eslint-config-flat-gitignore": "^1.0.0", "eslint-config-prettier": "^10.0.1", "eslint-plugin-perfectionist": "^4.6.0", "eslint-plugin-prettier": "^5.2.2", "eslint-plugin-react-hooks": "^5.1.0", "eslint-plugin-unused-imports": "^4.1.4", "globals": "^15.14.0", "prettier": "^3.4.2", "typescript-eslint": "^8.20.0" }, "peerDependencies": { "eslint": ">= 9.0.0" } }, "sha512-X/eBlYYZ9ff7fS7/fmWDmucZYB13gH/fOd1BI/lDnSuQjzYwl2r8m1kQZQ4iDHKMdJpmDcQ/yfWXA4XJjE6CyA=="],
+    "@echristian/eslint-config": ["@echristian/eslint-config@0.0.16", "", { "dependencies": { "@eslint/js": "^9.18.0", "@stylistic/eslint-plugin": "^2.13.0", "defu": "^6.1.4", "eslint-config-flat-gitignore": "^1.0.0", "eslint-config-prettier": "^10.0.1", "eslint-plugin-perfectionist": "^4.6.0", "eslint-plugin-prettier": "^5.2.2", "eslint-plugin-react-hooks": "^5.1.0", "eslint-plugin-unused-imports": "^4.1.4", "globals": "^15.14.0", "prettier": "^3.4.2", "typescript-eslint": "^8.20.0" }, "peerDependencies": { "eslint": ">= 9.0.0" } }, "sha512-Up4wiq3EademFjNcMmLxNeiYblLVA+KJS0pB2Fuo2D3FAOkBV6zE6zdXoJoWxYkffsEVJsWSDSuoXrYaBDHmig=="],
 
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.24.0", "", { "os": "aix", "cpu": "ppc64" }, "sha512-WtKdFM7ls47zkKHFVzMz8opM7LkcsIp9amDUBIAWirg70RM71WRSjdILPsY5Uv1D42ZpUfaPILDlfactHgsRkw=="],
 

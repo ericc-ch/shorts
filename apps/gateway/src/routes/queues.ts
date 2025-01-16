@@ -1,15 +1,15 @@
-import { getQueues, markAsUploadedQueue } from "@/lib/db/queues";
-import { zValidator } from "@hono/zod-validator";
-import { Hono } from "hono";
-import { z } from "zod";
+import { getQueues, markAsUploadedQueue } from "@/lib/db/queues"
+import { zValidator } from "@hono/zod-validator"
+import { Hono } from "hono"
+import { z } from "zod"
 
-const routes = new Hono();
+const routes = new Hono()
 
 routes.get("/queues", async (c) => {
-  const queues = await getQueues();
+  const queues = await getQueues()
 
-  return c.json(queues);
-});
+  return c.json(queues)
+})
 
 routes.post(
   "/queues/mark-uploaded",
@@ -20,13 +20,13 @@ routes.post(
     }),
   ),
   async (c) => {
-    const validated = c.req.valid("json");
-    const ids = validated.ids;
+    const validated = c.req.valid("json")
+    const ids = validated.ids
 
-    const result = await markAsUploadedQueue(ids, { isUploaded: true });
+    const result = await markAsUploadedQueue(ids, { isUploaded: true })
 
-    return c.json(result);
+    return c.json(result)
   },
-);
+)
 
-export default routes;
+export default routes

@@ -1,17 +1,17 @@
-import { desc, eq, inArray } from "drizzle-orm";
-import { queueTable } from "schema";
+import { desc, eq, inArray } from "drizzle-orm"
+import { queueTable } from "schema"
 
-import { db } from "../db";
+import { db } from "../db"
 
 export async function insertQueue(queue: typeof queueTable.$inferInsert) {
-  const result = await db.insert(queueTable).values(queue).returning();
-  return result.at(0)!;
+  const result = await db.insert(queueTable).values(queue).returning()
+  return result.at(0)!
 }
 
 export function getQueues() {
   return db.query.queueTable.findMany({
     orderBy: [desc(queueTable.createdAt)],
-  });
+  })
 }
 
 export function updateQueue(
@@ -22,7 +22,7 @@ export function updateQueue(
     .update(queueTable)
     .set(queue)
     .where(eq(queueTable.id, id))
-    .returning();
+    .returning()
 }
 
 export function markAsUploadedQueue(
@@ -33,5 +33,5 @@ export function markAsUploadedQueue(
     .update(queueTable)
     .set(queue)
     .where(inArray(queueTable.id, ids))
-    .returning();
+    .returning()
 }

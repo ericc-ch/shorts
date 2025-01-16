@@ -1,10 +1,10 @@
-import { useCreateCrackbotReaction } from "@/lib/api/crackbot.reaction";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { payloadCrackBotReaction, renderOptions } from "schema";
-import { z } from "zod";
+import { useCreateCrackbotReaction } from "@/lib/api/crackbot.reaction"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { payloadCrackBotReaction, renderOptions } from "schema"
+import { z } from "zod"
 
-import { Button } from "../ui/button";
+import { Button } from "../ui/button"
 import {
   Form,
   FormControl,
@@ -13,18 +13,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
+} from "../ui/form"
+import { Input } from "../ui/input"
+import { Separator } from "../ui/separator"
 
 const formSchema = payloadCrackBotReaction.extend({
   renderOptions: renderOptions,
-});
+})
 
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof formSchema>
 
 export function FormCrackbotReaction() {
-  const createCrackbotReaction = useCreateCrackbotReaction();
+  const createCrackbotReaction = useCreateCrackbotReaction()
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -35,13 +35,13 @@ export function FormCrackbotReaction() {
       },
     },
     resolver: zodResolver(formSchema),
-  });
+  })
 
   const onSubmit = (values: FormValues) => {
     createCrackbotReaction.mutate(values, {
       onSuccess: () => form.reset(),
-    });
-  };
+    })
+  }
 
   return (
     <Form {...form}>
@@ -124,5 +124,5 @@ export function FormCrackbotReaction() {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

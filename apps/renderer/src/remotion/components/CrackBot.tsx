@@ -1,34 +1,34 @@
-import { makeTransform, rotate } from "@remotion/animation-utils";
-import { useAudioData, visualizeAudio } from "@remotion/media-utils";
-import { useCurrentFrame, useVideoConfig } from "remotion";
+import { makeTransform, rotate } from "@remotion/animation-utils"
+import { useAudioData, visualizeAudio } from "@remotion/media-utils"
+import { useCurrentFrame, useVideoConfig } from "remotion"
 
 interface Props {
-  audioSrc: string;
-  maxRotation?: number;
+  audioSrc: string
+  maxRotation?: number
 }
 
 export function CrackBot({ audioSrc, maxRotation = 7 }: Props) {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const frame = useCurrentFrame()
+  const { fps } = useVideoConfig()
 
-  const audioData = useAudioData(audioSrc);
+  const audioData = useAudioData(audioSrc)
 
-  if (!audioData) return null;
+  if (!audioData) return null
 
   const frequencyData = visualizeAudio({
     audioData,
     fps,
     frame,
     numberOfSamples: 1,
-  });
+  })
 
-  const transformOrigin = "70% 10%";
-  const transform = makeTransform([rotate(frequencyData[0] * maxRotation)]);
+  const transformOrigin = "70% 10%"
+  const transform = makeTransform([rotate(frequencyData[0] * maxRotation)])
 
   const style = {
     transform,
     transformOrigin,
-  };
+  }
 
   return (
     <svg
@@ -308,5 +308,5 @@ export function CrackBot({ audioSrc, maxRotation = 7 }: Props) {
         </g>
       </g>
     </svg>
-  );
+  )
 }

@@ -1,20 +1,22 @@
-import { queues } from "@/lib/api/queues";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { Queue } from "schema";
+import { queues } from "@/lib/api/queues"
+import { useQuery } from "@tanstack/react-query"
+import { useState } from "react"
+import { Queue } from "schema"
 
-import { DialogDetails } from "./components/DialogDetails";
-import { DialogNew } from "./components/DialogNew";
-import { VideoCard } from "./components/VideoCard";
+import { DialogDetails } from "./components/DialogDetails"
+import { DialogNew } from "./components/DialogNew"
+import { VideoCard } from "./components/VideoCard"
 
 export function Home() {
-  const [selected, setSelected] = useState<Queue>();
-  const isDialogOpen = Boolean(selected);
+  const [selected, setSelected] = useState<Queue>()
+  const isDialogOpen = Boolean(selected)
 
-  const closeDialog = () => setSelected(undefined);
+  const closeDialog = () => {
+    setSelected(undefined)
+  }
 
-  const listQueuesQuery = useQuery(queues.list());
-  const queuesData = listQueuesQuery.data ?? [];
+  const listQueuesQuery = useQuery(queues.list())
+  const queuesData = listQueuesQuery.data ?? []
 
   return (
     <div className="container mx-auto p-4">
@@ -27,19 +29,23 @@ export function Home() {
         {queuesData.map((queue) => (
           <VideoCard
             key={queue.id}
-            onViewDetails={() => setSelected(queue)}
             queue={queue}
+            onViewDetails={() => {
+              setSelected(queue)
+            }}
           />
         ))}
       </div>
 
       <DialogDetails
-        onClose={closeDialog}
-        onMarkUploadedSuccess={closeDialog}
-        onOpenChange={(open) => (open ? undefined : setSelected(undefined))}
         open={isDialogOpen}
         queue={selected}
+        onClose={closeDialog}
+        onMarkUploadedSuccess={closeDialog}
+        onOpenChange={(open) => {
+          open ? undefined : setSelected(undefined)
+        }}
       />
     </div>
-  );
+  )
 }

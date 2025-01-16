@@ -1,8 +1,8 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
-import type { Metadata, RenderOptions } from "../common.schema";
-import type { Payload } from "../payloads";
-import type { VIDEO_TYPE } from "../video-types";
+import type { Metadata, RenderOptions } from "../common.schema"
+import type { Payload } from "../payloads"
+import type { VIDEO_TYPE } from "../video-types"
 
 export const queueTable = sqliteTable("queue", {
   id: integer("id").primaryKey(),
@@ -25,6 +25,6 @@ export const queueTable = sqliteTable("queue", {
   // https://github.com/drizzle-team/drizzle-orm/issues/2323
   createdAt: integer("created_at").notNull(),
   updatedAt: integer("updated_at").notNull(),
-});
+})
 
-export type Queue = typeof queueTable.$inferSelect;
+export type Queue = typeof queueTable.$inferSelect

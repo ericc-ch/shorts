@@ -1,20 +1,15 @@
-import React from "react";
-import {
-  AbsoluteFill,
-  spring,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
+import React from "react"
+import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from "remotion"
 
-import { Word } from "./Word";
+import { Word } from "./Word"
 
 interface Props {
-  text: string;
+  text: string
 }
 
 export function Subtitle({ text }: Props) {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const frame = useCurrentFrame()
+  const { fps } = useVideoConfig()
 
   const enter = spring({
     config: {
@@ -23,17 +18,17 @@ export function Subtitle({ text }: Props) {
     durationInFrames: 5,
     fps,
     frame,
-  });
+  })
 
   // Overlay stroked text with normal text to create an effect where the stroke is outside
   return (
     <AbsoluteFill>
       <AbsoluteFill>
-        <Word enterProgress={enter} stroke text={text} />
+        <Word stroke enterProgress={enter} text={text} />
       </AbsoluteFill>
       <AbsoluteFill>
         <Word enterProgress={enter} stroke={false} text={text} />
       </AbsoluteFill>
     </AbsoluteFill>
-  );
+  )
 }
